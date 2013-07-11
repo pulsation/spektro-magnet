@@ -19,7 +19,6 @@ class AlarmSandboxReceiver extends BroadcastReceiver
 
   override def onReceive(context: Context, intent: Intent) {
       Log.i("AlarmSandboxReceiver", "===> AlarmSandboxReceiver invoked! <===")
-      return;
     }
 
 }

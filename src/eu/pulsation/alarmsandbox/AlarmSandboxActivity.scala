@@ -10,8 +10,7 @@ class AlarmSandboxActivity extends Activity
    override def onCreate(savedInstanceState: Bundle)
    {
      super.onCreate(savedInstanceState)
-     var helper = new AlarmSandboxHelper(this)
-     helper.addAlarm() 
+     new AlarmSandboxHelper(this).addAlarm()
      setContentView(R.layout.main)
    }
 }
