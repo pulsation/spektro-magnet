@@ -21,11 +21,11 @@ import android.widget.Toast;
  */
 public class AlarmSandboxReceiver extends BroadcastReceiver {
 
-	@Override
-	public void onReceive(Context context, Intent intent) {
-    //Toast.makeText(context, "Rise and Shine!", 1000).show();
-		Log.i("AlarmSandboxReceiver", "===> AlarmSandboxReceiver invoked! <===");
-			return;
-		}
+  @Override
+    public void onReceive(Context context, Intent intent) {
+      //Toast.makeText(context, "Rise and Shine!", 1000).show();
+      Log.i("AlarmSandboxReceiver", "===> AlarmSandboxReceiver invoked! <===");
+      return;
+    }
 
 }

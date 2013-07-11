@@ -27,53 +27,48 @@ import android.content.IntentFilter;
  */
 public class AlarmSandboxHelper {
 
-    private Context ctx;
+  private Context ctx;
 
-    public AlarmSandboxHelper(Context context) {
-	this.ctx = context;
-    }
+  public AlarmSandboxHelper(Context context) {
+    this.ctx = context;
+  }
 
-    /**
-     * @see LocalNotification#add(boolean, String, String, String, int,
-     *      Calendar)
-     */
-    public boolean addAlarm() {
+  /**
+   * @see LocalNotification#add(boolean, String, String, String, int,
+   *      Calendar)
+   */
+  public boolean addAlarm() {
 
-	final AlarmManager am = getAlarmManager();
+    final AlarmManager am = getAlarmManager();
 
-  final BroadcastReceiver br = new AlarmSandboxReceiver();
+    final BroadcastReceiver br = new AlarmSandboxReceiver();
 
-  this.ctx.registerReceiver (br,new IntentFilter ("my.alarm.action"));
+    this.ctx.registerReceiver (br,new IntentFilter ("my.alarm.action"));
 
-  Intent i = new Intent();
-  i.setAction("my.alarm.action");
-  
-	final PendingIntent pi = PendingIntent.getBroadcast(this.ctx, 0, i, /*PendingIntent.FLAG_CANCEL_CURRENT*/ 0);
+    Intent i = new Intent();
+    i.setAction("my.alarm.action");
 
-	    am.setRepeating(/*AlarmManager.RTC_WAKEUP*/0, new Date().getTime() , 5000,  pi);
+    final PendingIntent pi = PendingIntent.getBroadcast(this.ctx, 0, i, PendingIntent.FLAG_CANCEL_CURRENT);
 
-		    Log.i("AlarmSandboxActivity", "===> Alarm added! <===");
+    am.setRepeating(AlarmManager.RTC_WAKEUP, new Date().getTime() , 5000,  pi);
 
-	return true;
-    }
+    Log.i("AlarmSandboxActivity", "===> Alarm added! <===");
 
-    /**
-     * @see LocalNotification#cancelNotification(int)
-     */
-    public boolean cancelAlarm(/*String notificationId*/) {
-	/*
-	 * Create an intent that looks similar, to the one that was registered
-	 * using add. Making sure the notification id in the action is the same.
-	 * Now we can search for such an intent using the 'getService' method
-	 * and cancel it.
-	 */
-	final Intent intent = new Intent(this.ctx, AlarmSandboxReceiver.class);
-	return true;
-    }
+    return true;
+  }
 
-    private AlarmManager getAlarmManager() {
-	final AlarmManager am = (AlarmManager) this.ctx.getSystemService(Context.ALARM_SERVICE);
+  /**
+   * @see LocalNotification#cancelNotification(int)
+   */
+  public boolean cancelAlarm(/*String notificationId*/) {
 
-	return am;
-    }
+    final Intent intent = new Intent(this.ctx, AlarmSandboxReceiver.class);
+    return true;
+  }
+
+  private AlarmManager getAlarmManager() {
+    final AlarmManager am = (AlarmManager) this.ctx.getSystemService(Context.ALARM_SERVICE);
+
+    return am;
+  }
 }

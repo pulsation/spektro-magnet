@@ -6,13 +6,13 @@ import android.util.Log
 
 class AlarmSandboxActivity extends Activity
 {
-    /** Called when the activity is first created. */
-    override def onCreate(savedInstanceState: Bundle)
-    {
-      super.onCreate(savedInstanceState)
-        var helper = new AlarmSandboxHelper(this)
-        helper.addAlarm() 
-        setContentView(R.layout.main)
-    }
+  /** Called when the activity is first created. */
+   override def onCreate(savedInstanceState: Bundle)
+   {
+     super.onCreate(savedInstanceState)
+     var helper = new AlarmSandboxHelper(this)
+     helper.addAlarm() 
+     setContentView(R.layout.main)
+   }
 }
 
