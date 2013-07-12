@@ -4,8 +4,9 @@ import java.util.Calendar
 
 import android.content.{BroadcastReceiver, Context, Intent}
 import android.util.Log
-import android.location.LocationManager
-import android.location.Location
+import android.location.{LocationManager, Location, LocationListener}
+
+import android.os.Bundle
 
 import android.hardware.{SensorEventListener, SensorManager, SensorEvent, Sensor}
 
@@ -21,17 +22,27 @@ class AlarmSandboxReceiver extends BroadcastReceiver // with SensorEventListener
 
   override def onReceive(context: Context, intent: Intent) {
       
-    def getLastLocation() = {
-
+    class AlarmSandboxLocator extends LocationListener {
+  
       def getLocManager() = {
         context.getSystemService(Context.LOCATION_SERVICE) match {
           case lm: LocationManager => lm
           case _ => throw new ClassCastException
         }
       }
+  
+      def onLocationChanged (location: Location) = {
+        Log.i("AlarmSandboxReceiver", "===> Got location update! " + location + " <===")
+      }
+
+      def onProviderDisabled (provider: String) = {}
+
+      def onProviderEnabled (provider: String) = {}
+      
+      def onStatusChanged (provider: String, status: Int, extras: Bundle)  = {}
 
       val locManager:LocationManager = getLocManager()
-      locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+      locManager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, this, null)
     }
 
     class AlarmSandboxAccelerometer extends SensorEventListener {
@@ -59,9 +70,7 @@ class AlarmSandboxReceiver extends BroadcastReceiver // with SensorEventListener
       }
     }
 
-    val lastLoc: Location = getLastLocation ()
-    Log.i("AlarmSandboxReceiver", "===> AlarmSandboxReceiver invoked! " + lastLoc + " <===")
-
+    new AlarmSandboxLocator()
     new AlarmSandboxAccelerometer().getAccelerometer()
   }
 
