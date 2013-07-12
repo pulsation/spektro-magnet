@@ -35,9 +35,9 @@ class AlarmSandboxHelper(context: Context) {
     val receiverIntent:Intent = new Intent()
     receiverIntent.setAction("my.alarm.action")
 
-    val pendingReceiver:PendingIntent = PendingIntent.getBroadcast(this.context, 0, receiverIntent, PendingIntent.FLAG_CANCEL_CURRENT)
+    val scheduledReceiver:PendingIntent = PendingIntent.getBroadcast(this.context, 0, receiverIntent, PendingIntent.FLAG_CANCEL_CURRENT)
 
-    am.setRepeating(AlarmManager.RTC_WAKEUP, new Date().getTime() , 10000,  pendingReceiver)
+    am.setRepeating(AlarmManager.RTC_WAKEUP, new Date().getTime() , 10000,  scheduledReceiver)
 
     Log.i("AlarmSandboxActivity", "===> Alarm added! <===")
   }
