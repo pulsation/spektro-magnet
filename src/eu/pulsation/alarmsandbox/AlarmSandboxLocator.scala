@@ -15,7 +15,11 @@ class AlarmSandboxLocator(context: Context) extends LocationListener {
   }
 
   def onLocationChanged (location: Location) = {
-    Log.i("AlarmSandboxReceiver", "===> Got location update! " + location + " <===")
+    Log.i("AlarmSandboxLocator", "===> Got location update at " + location.getElapsedRealtimeNanos() + " <===")
+    Log.i("AlarmSandboxLocator", "===> Latitude: " + location.getLatitude()+ " <===")
+    Log.i("AlarmSandboxLocator", "===> Longitude: " + location.getLongitude()+ " <===")
+    Log.i("AlarmSandboxLocator", "===> Altitude: " + location.getAltitude()+ " <===")
+    Log.i("AlarmSandboxLocator", "===> Speed: " + location.getSpeed()+ " <===")
   }
 
   def onProviderDisabled (provider: String) = {}

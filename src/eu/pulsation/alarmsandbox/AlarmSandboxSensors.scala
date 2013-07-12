@@ -18,7 +18,7 @@ class AlarmSandboxSensors(context: Context) extends SensorEventListener {
   val allSensors = sensorManager.getSensorList(Sensor.TYPE_ALL).toSet
 
   def subscribeSensor(s: Sensor) = {
-    Log.i("AlarmSandboxSensor", "===> Available sensor: " + s.getType() + "(" + s.getName() + ") <===")
+    Log.i("AlarmSandboxSensors", "===> Available sensor: " + s.getType() + "(" + s.getName() + ") <===")
     val sensor = sensorManager.getDefaultSensor(s.getType())
     sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
   }
@@ -27,7 +27,9 @@ class AlarmSandboxSensors(context: Context) extends SensorEventListener {
 
 
   def onSensorChanged(event: SensorEvent) {
-    Log.i("AlarmSandboxReceiver", "===> " + event.sensor.getName() + " value received!" + event.values(0) + " <===")
+    val values = event.values.toSet
+    Log.i("AlarmSandboxSensors", "===> " + event.sensor.getName() + " values received at " + event.timestamp + " ! <===")
+    values.foreach(v => Log.i("AlarmSandboxSensors", "===> " + event.sensor.getName() + ": " + v + " <==="))
     sensorManager.unregisterListener(this)
   }
 
