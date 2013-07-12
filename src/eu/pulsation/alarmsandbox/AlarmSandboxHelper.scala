@@ -21,16 +21,16 @@ class AlarmSandboxHelper(context: Context) {
 
     val am:AlarmManager = getAlarmManager()
 
-    val br:BroadcastReceiver = new AlarmSandboxReceiver()
+    val sandboxBroadcastReceiver:BroadcastReceiver = new AlarmSandboxReceiver()
 
-    context.registerReceiver (br, new IntentFilter ("my.alarm.action"))
+    context.registerReceiver (sandboxBroadcastReceiver, new IntentFilter ("my.alarm.action"))
 
-    val i:Intent = new Intent()
-    i.setAction("my.alarm.action")
+    val receiverIntent:Intent = new Intent()
+    receiverIntent.setAction("my.alarm.action")
 
-    val pi:PendingIntent = PendingIntent.getBroadcast(this.context, 0, i, PendingIntent.FLAG_CANCEL_CURRENT)
+    val pendingReceiver:PendingIntent = PendingIntent.getBroadcast(this.context, 0, receiverIntent, PendingIntent.FLAG_CANCEL_CURRENT)
 
-    am.setRepeating(AlarmManager.RTC_WAKEUP, new Date().getTime() , 5000,  pi)
+    am.setRepeating(AlarmManager.RTC_WAKEUP, new Date().getTime() , 5000,  pendingReceiver)
 
     Log.i("AlarmSandboxActivity", "===> Alarm added! <===")
   }
