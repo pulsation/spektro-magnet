@@ -17,6 +17,6 @@ class AlarmSandboxReceiver extends BroadcastReceiver // with SensorEventListener
 
   override def onReceive(context: Context, intent: Intent) {
     new AlarmSandboxLocator(context)
-    new AlarmSandboxSensor(context, Sensor.TYPE_ACCELEROMETER)
+    new AlarmSandboxSensors(context)
   }
 }
