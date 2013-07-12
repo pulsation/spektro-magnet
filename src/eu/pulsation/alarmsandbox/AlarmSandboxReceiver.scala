@@ -7,6 +7,8 @@ import android.util.Log
 import android.location.LocationManager
 import android.location.Location
 
+import android.hardware.{SensorEventListener, SensorManager, SensorEvent, Sensor}
+
 /**
  * The alarm receiver is triggered when a scheduled alarm is fired. This class
  * reads the information in the intent and displays this information in the
@@ -32,7 +34,6 @@ class AlarmSandboxReceiver extends BroadcastReceiver // with SensorEventListener
       locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
     }
 
-    /*
     class AlarmSandboxAccelerometer extends SensorEventListener {
       def getSensorManager() = {
         context.getSystemService(Context.SENSOR_SERVICE) match {
@@ -49,14 +50,19 @@ class AlarmSandboxReceiver extends BroadcastReceiver // with SensorEventListener
       }
 
       def onSensorChanged(event: SensorEvent) {
-        sensorManager.ungregisterListener(this)
+        Log.i("AlarmSandboxReceiver", "===> Accelerator value received!" + event.values(0) + " <===")
+        sensorManager.unregisterListener(this)
+      }
+
+      def onAccuracyChanged(sensor: Sensor, accuracy: Int) = {
+
       }
     }
-*/
-
 
     val lastLoc: Location = getLastLocation ()
     Log.i("AlarmSandboxReceiver", "===> AlarmSandboxReceiver invoked! " + lastLoc + " <===")
+
+    new AlarmSandboxAccelerometer().getAccelerometer()
   }
 
 
