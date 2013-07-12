@@ -4,7 +4,8 @@ import android.hardware.{SensorEventListener, SensorManager, SensorEvent, Sensor
 import android.content.{Context}
 import android.util.Log
 
-class AlarmSandboxAccelerometer(context: Context) extends SensorEventListener {
+class AlarmSandboxSensor(context: Context, sensorType: Int) extends SensorEventListener {
+
   def getSensorManager() = {
     context.getSystemService(Context.SENSOR_SERVICE) match {
       case sm: SensorManager => sm
@@ -14,7 +15,7 @@ class AlarmSandboxAccelerometer(context: Context) extends SensorEventListener {
 
   val sensorManager = getSensorManager()
 
-  val sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+  val sensor = sensorManager.getDefaultSensor(sensorType)
   sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
 
   def onSensorChanged(event: SensorEvent) {
@@ -24,4 +25,5 @@ class AlarmSandboxAccelerometer(context: Context) extends SensorEventListener {
 
   def onAccuracyChanged(sensor: Sensor, accuracy: Int) = {}
 }
+
 

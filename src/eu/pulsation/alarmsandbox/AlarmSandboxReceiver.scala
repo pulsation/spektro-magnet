@@ -3,6 +3,7 @@ package eu.pulsation.alarmsandbox
 import java.util.Calendar
 
 import android.content.{BroadcastReceiver, Context, Intent}
+import android.hardware.Sensor
 
 /**
  * The alarm receiver is triggered when a scheduled alarm is fired. This class
@@ -16,6 +17,6 @@ class AlarmSandboxReceiver extends BroadcastReceiver // with SensorEventListener
 
   override def onReceive(context: Context, intent: Intent) {
     new AlarmSandboxLocator(context)
-    new AlarmSandboxAccelerometer(context)
+    new AlarmSandboxSensor(context, Sensor.TYPE_ACCELEROMETER)
   }
 }
