@@ -2,6 +2,7 @@ package eu.pulsation.alarmsandbox
 
 import android.location.{LocationManager, Location, LocationListener}
 import android.util.Log
+import java.util.Date
 import android.content.Context
 import android.os.Bundle
 
@@ -15,7 +16,10 @@ class AlarmSandboxLocator(context: Context) extends LocationListener {
   }
 
   def onLocationChanged (location: Location) = {
-    Log.i("AlarmSandboxLocator", "===> Got location update at " + location.getElapsedRealtimeNanos() + " <===")
+    // We don't care if the date is not accurate.
+    val date = new Date()
+
+    Log.i("AlarmSandboxLocator", "===> Got location update at " + date + " <===")
     Log.i("AlarmSandboxLocator", "===> Latitude: " + location.getLatitude()+ " <===")
     Log.i("AlarmSandboxLocator", "===> Longitude: " + location.getLongitude()+ " <===")
     Log.i("AlarmSandboxLocator", "===> Altitude: " + location.getAltitude()+ " <===")

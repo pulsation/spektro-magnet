@@ -3,6 +3,7 @@ package eu.pulsation.alarmsandbox
 import android.hardware.{SensorEventListener, SensorManager, SensorEvent, Sensor}
 import android.content.{Context}
 import android.util.Log
+import java.util.Date
 import scala.collection.JavaConversions._
 
 class AlarmSandboxSensors(context: Context) extends SensorEventListener {
@@ -27,8 +28,10 @@ class AlarmSandboxSensors(context: Context) extends SensorEventListener {
 
 
   def onSensorChanged(event: SensorEvent) {
+    // We don't care if the date is not accurate.
+    val date = new Date()
     val values = event.values.toSet
-    Log.i("AlarmSandboxSensors", "===> " + event.sensor.getName() + " values received at " + event.timestamp + " ! <===")
+    Log.i("AlarmSandboxSensors", "===> " + event.sensor.getName() + " values received at " + date + " ! <===")
     values.foreach(v => Log.i("AlarmSandboxSensors", "===> " + event.sensor.getName() + ": " + v + " <==="))
     sensorManager.unregisterListener(this)
   }

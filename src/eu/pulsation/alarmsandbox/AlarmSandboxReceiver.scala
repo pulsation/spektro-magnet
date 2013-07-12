@@ -1,7 +1,5 @@
 package eu.pulsation.alarmsandbox
 
-import java.util.Calendar
-
 import android.content.{BroadcastReceiver, Context, Intent}
 import android.hardware.Sensor
 
