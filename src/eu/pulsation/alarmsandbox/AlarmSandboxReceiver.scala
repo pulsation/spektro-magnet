@@ -55,23 +55,19 @@ class AlarmSandboxReceiver extends BroadcastReceiver // with SensorEventListener
 
       val sensorManager = getSensorManager()
 
-      def getAccelerometer() = {
-        val accel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-        sensorManager.registerListener(this, accel, SensorManager.SENSOR_DELAY_NORMAL)
-      }
+      val accel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+      sensorManager.registerListener(this, accel, SensorManager.SENSOR_DELAY_NORMAL)
 
       def onSensorChanged(event: SensorEvent) {
         Log.i("AlarmSandboxReceiver", "===> Accelerator value received!" + event.values(0) + " <===")
         sensorManager.unregisterListener(this)
       }
 
-      def onAccuracyChanged(sensor: Sensor, accuracy: Int) = {
-
-      }
+      def onAccuracyChanged(sensor: Sensor, accuracy: Int) = {}
     }
 
     new AlarmSandboxLocator()
-    new AlarmSandboxAccelerometer().getAccelerometer()
+    new AlarmSandboxAccelerometer()
   }
 
 
