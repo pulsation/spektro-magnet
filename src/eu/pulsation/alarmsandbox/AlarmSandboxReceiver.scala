@@ -2,9 +2,7 @@ package eu.pulsation.alarmsandbox
 
 import java.util.Calendar
 
-import android.app.{Notification, NotificationManager, PendingIntent}
 import android.content.{BroadcastReceiver, Context, Intent}
-import android.os.Bundle
 import android.util.Log
 import android.location.LocationManager
 import android.location.Location
@@ -16,7 +14,7 @@ import android.location.Location
  * sound and it vibrates the phone.
  * 
  */
-class AlarmSandboxReceiver extends BroadcastReceiver 
+class AlarmSandboxReceiver extends BroadcastReceiver // with SensorEventListener
 {
 
   override def onReceive(context: Context, intent: Intent) {
@@ -33,6 +31,29 @@ class AlarmSandboxReceiver extends BroadcastReceiver
       val locManager:LocationManager = getLocManager()
       locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
     }
+
+    /*
+    class AlarmSandboxAccelerometer extends SensorEventListener {
+      def getSensorManager() = {
+        context.getSystemService(Context.SENSOR_SERVICE) match {
+          case sm: SensorManager => sm
+          case _ => throw new ClassCastException
+        }
+      }
+
+      val sensorManager = getSensorManager()
+
+      def getAccelerometer() = {
+        val accel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+        sensorManager.registerListener(this, accel, SensorManager.SENSOR_DELAY_NORMAL)
+      }
+
+      def onSensorChanged(event: SensorEvent) {
+        sensorManager.ungregisterListener(this)
+      }
+    }
+*/
+
 
     val lastLoc: Location = getLastLocation ()
     Log.i("AlarmSandboxReceiver", "===> AlarmSandboxReceiver invoked! " + lastLoc + " <===")
