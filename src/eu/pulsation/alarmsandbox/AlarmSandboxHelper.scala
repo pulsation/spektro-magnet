@@ -19,6 +19,13 @@ class AlarmSandboxHelper(context: Context) {
 
   def addAlarm() {
 
+    def getAlarmManager() : AlarmManager = {
+      context.getSystemService(Context.ALARM_SERVICE) match {
+        case am: AlarmManager => am
+        case _ => throw new ClassCastException
+      }
+    }
+
     val am:AlarmManager = getAlarmManager()
 
     val sandboxBroadcastReceiver:BroadcastReceiver = new AlarmSandboxReceiver()
@@ -30,7 +37,7 @@ class AlarmSandboxHelper(context: Context) {
 
     val pendingReceiver:PendingIntent = PendingIntent.getBroadcast(this.context, 0, receiverIntent, PendingIntent.FLAG_CANCEL_CURRENT)
 
-    am.setRepeating(AlarmManager.RTC_WAKEUP, new Date().getTime() , 5000,  pendingReceiver)
+    am.setRepeating(AlarmManager.RTC_WAKEUP, new Date().getTime() , 10000,  pendingReceiver)
 
     Log.i("AlarmSandboxActivity", "===> Alarm added! <===")
   }
@@ -42,10 +49,4 @@ class AlarmSandboxHelper(context: Context) {
     // TODO
   }
 
-  def getAlarmManager() : AlarmManager = {
-    context.getSystemService(Context.ALARM_SERVICE) match {
-      case am: AlarmManager => am
-      case _ => throw new ClassCastException
-    }
-  }
 }
