@@ -16,7 +16,8 @@ class AlarmSandboxActivity extends Activity
 
      // test couchbase lite
      val filesDir:String = this.getFilesDir().getAbsolutePath()
-//     val sblserver:CBLServer = new CBLServer(filesDir) 
+     Log.i("AlarmSandboxActivity", "===> filesDir: " + filesDir + " <===")
+     val sblserver:CBLServer = new CBLServer(filesDir) 
 
      new AlarmSandboxHelper(this).addAlarm()
      setContentView(R.layout.main)

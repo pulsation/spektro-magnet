@@ -1,9 +1,14 @@
 import android.Keys._                                                                                                                                                                                              
+
 android.Plugin.androidBuild
+
+logLevel := Level.Debug
 
 name := "AlarmSandbox"
 
-proguardOptions in Android ++= Seq("-dontobfuscate", "-dontoptimize", "-ignorewarnings")
+// proguardOptions in Android ++= Seq("-dontobfuscate", "-dontoptimize", "-ignorewarnings")
+proguardOptions in Android ++= Seq("-dontobfuscate", "-dontoptimize", "-dontwarn com.couchbase.cblite.**",
+  "-dontwarn org.codehaus.jackson.map.ext.**")
 
 resolvers += "Couchbase" at "http://maven.hq.couchbase.com/nexus/content/repositories/releases/"
 
