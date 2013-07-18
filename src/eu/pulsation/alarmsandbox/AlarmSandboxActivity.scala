@@ -3,6 +3,7 @@ package eu.pulsation.alarmsandbox
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log
+import com.couchbase.cblite.router.CBLURLStreamHandlerFactory
 
 class AlarmSandboxActivity extends Activity
 {
@@ -10,6 +11,9 @@ class AlarmSandboxActivity extends Activity
    override def onCreate(savedInstanceState: Bundle)
    {
      super.onCreate(savedInstanceState)
+
+     // c.f. https://github.com/couchbase/couchbase-lite-android/wiki/FAQ-Android#q-why-do-i-see-a-message-like-javanetmalformedurlexception-unknown-protocol-cblite
+     CBLURLStreamHandlerFactory.registerSelfIgnoreError()
 
      new AlarmSandboxHelper(this).addAlarm()
      setContentView(R.layout.main)
