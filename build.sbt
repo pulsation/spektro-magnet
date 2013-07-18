@@ -6,9 +6,17 @@ logLevel := Level.Debug
 
 name := "AlarmSandbox"
 
-// proguardOptions in Android ++= Seq("-dontobfuscate", "-dontoptimize", "-ignorewarnings")
-proguardOptions in Android ++= Seq("-dontobfuscate", "-dontoptimize", "-dontwarn com.couchbase.cblite.**",
-  "-dontwarn org.codehaus.jackson.map.ext.**")
+proguardOptions in Android ++= Seq("-dontobfuscate", "-dontoptimize",
+ "-dontwarn org.apache.http.**",
+ "-dontwarn org.joda.time.**",
+ "-dontwarn javax.servlet.**",
+ "-dontwarn org.apache.log.**",
+ "-dontwarn org.apache.log4j.**",
+ "-dontwarn org.apache.avalon.**",
+ "-dontwarn org.w3c.dom.bootstrap.**",
+ "-dontnote java.util.**",
+ "-dontnote org.apache.commons.logging.**",
+ "-dontnote org.apache.http.**")
 
 resolvers += "Couchbase" at "http://maven.hq.couchbase.com/nexus/content/repositories/releases/"
 
