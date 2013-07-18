@@ -4,9 +4,10 @@ import android.hardware.{SensorEventListener, SensorManager, SensorEvent, Sensor
 import android.content.{Context}
 import android.util.Log
 import java.util.Date
+
 import scala.collection.JavaConversions._
 
-class AlarmSandboxSensors(context: Context) extends SensorEventListener {
+class AlarmSandboxSensors(override val context: Context) extends SensorEventListener with AlarmSandboxDataProducer {
 
   def getSensorManager() = {
     context.getSystemService(Context.SENSOR_SERVICE) match {

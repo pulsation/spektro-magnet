@@ -6,7 +6,7 @@ import java.util.Date
 import android.content.Context
 import android.os.Bundle
 
-class AlarmSandboxLocator(context: Context) extends LocationListener {
+class AlarmSandboxLocator(override val context: Context) extends LocationListener with AlarmSandboxDataProducer {
 
   def getLocManager() = {
     context.getSystemService(Context.LOCATION_SERVICE) match {

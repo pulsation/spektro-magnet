@@ -2,7 +2,7 @@ import android.Keys._
 
 android.Plugin.androidBuild
 
-logLevel := Level.Debug
+// logLevel := Level.Debug
 
 name := "AlarmSandbox"
 
