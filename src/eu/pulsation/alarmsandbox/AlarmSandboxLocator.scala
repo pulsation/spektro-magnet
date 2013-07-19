@@ -30,4 +30,5 @@ class AlarmSandboxLocator(override val context: Context) extends LocationListene
 
   val locManager:LocationManager = getLocManager()
   locManager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, this, null)
+  //locManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, this, null)
 }

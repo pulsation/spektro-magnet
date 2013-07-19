@@ -2,11 +2,11 @@ import android.Keys._
 
 android.Plugin.androidBuild
 
-// logLevel := Level.Debug
+logLevel := Level.Debug
 
 name := "AlarmSandbox"
 
-proguardOptions in Android ++= Seq("-dontobfuscate", "-dontoptimize",
+proguardOptions in Android ++= Seq("-dontobfuscate", "-dontoptimize", "-keep class com.couchbase.touchdb.TDCollateJSON",
  "-dontwarn org.apache.http.**",
  "-dontwarn org.joda.time.**",
  "-dontwarn javax.servlet.**",
