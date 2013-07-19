@@ -27,15 +27,22 @@ trait AlarmSandboxDataProducer {
   // To be overriden
   val context : Context = null
 
-  lazy val dbInstance : CouchDbInstance = {
+  lazy val server : CBLServer = {
     val filesDir:String = context.getFilesDir().getAbsolutePath()
     Log.i("AlarmSandboxDataProducer", "===> filesDir: " + filesDir + " <===")
-    val server:CBLServer = new CBLServer(filesDir) 
-    val database:CBLDatabase = server.getDatabaseNamed("AlarmSandbox", true)
+    new CBLServer(filesDir) 
+  }
+
+  lazy val database : CBLDatabase = {
+    server.getDatabaseNamed("AlarmSandbox", true)
+  }
+
+  lazy val dbInstance : CouchDbInstance = {
     database.open()
     val httpClient:HttpClient = new CBLiteHttpClient(server)
     new StdCouchDbInstance(httpClient)
   }
+
 
   /* Connect to the database and perform a task once this is done. */
   abstract class AlarmSandboxEktorpAsyncTask extends EktorpAsyncTask {
@@ -83,6 +90,7 @@ trait AlarmSandboxLocationDataProducer extends AlarmSandboxDataProducer {
         item.put("timestamp", now)
 
         dbConnector.create(item)
+        database.close()
       }
     }
     asyncTask.execute()
