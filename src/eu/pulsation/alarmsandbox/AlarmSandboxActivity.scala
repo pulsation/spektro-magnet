@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import com.couchbase.cblite.router.CBLURLStreamHandlerFactory
+// import com.couchbase.touchdb.TDCollateJSON
 
 class AlarmSandboxActivity extends Activity
 {
