@@ -8,6 +8,7 @@ import org.codehaus.jackson.node.JsonNodeFactory
 
 import com.couchbase.cblite.{CBLServer, CBLDatabase}
 import com.couchbase.cblite.ektorp.CBLiteHttpClient
+import com.couchbase.cblite.router.CBLURLConnection
 
 import org.ektorp.{CouchDbInstance, CouchDbConnector}
 import org.ektorp.http.HttpClient
@@ -34,27 +35,31 @@ trait AlarmSandboxDataProducer {
   }
 
   lazy val database : CBLDatabase = {
-    server.getDatabaseNamed("AlarmSandbox", true)
+    Log.i("AlarmSandboxDataProducer", "Before database")
+    server.getDatabaseNamed("alarmsandbox", true)
+  }
+
+  lazy val httpClient : HttpClient = {
+    Log.i("AlarmSandboxDataProducer", "Before httpclient")
+    new CBLiteHttpClient(server)  
   }
 
   lazy val dbInstance : CouchDbInstance = {
+/*    
     database.open()
-    val httpClient:HttpClient = new CBLiteHttpClient(server)
+    database.close()
+*/
+    Log.i("AlarmSandboxDataProducer", "Before dbInstance")
     new StdCouchDbInstance(httpClient)
   }
 
-
-  /* Connect to the database and perform a task once this is done. */
-  abstract class AlarmSandboxEktorpAsyncTask extends EktorpAsyncTask {
-
-
-    var dbConnector: CouchDbConnector = null
-    override def doInBackground() {
-      dbConnector = dbInstance.createConnector("AlarmSandbox", true)
-    } 
-    override def onDbAccessException(dbAccessException: DbAccessException) {
-      Log.e("AlarmSandboxDataProducer", "DbAccessException in background", dbAccessException)
-    }
+  lazy val dbConnector = {
+    Log.i("AlarmSandboxProducer", "===> Before createConnector <===")
+    var inst = dbInstance
+    Log.i("AlarmSandboxProducer", "dbInstance fetched")
+    val cn = inst.createConnector("alarmsandbox", true)
+    Log.i("AlarmSandboxProducer", "===> After createConnector <===")
+    cn
   }
 }
 
@@ -77,23 +82,16 @@ trait AlarmSandboxLocationDataProducer extends AlarmSandboxDataProducer {
 
     val now = dateFormatter.format(new Date())
 
-    val asyncTask = new AlarmSandboxEktorpAsyncTask() {
+    Log.i("AlarmSandboxDataProducer", "===> Entered onSuccess!!! <===");
+    item.put("_id", now + '-' + uuid)
+    item.put("sensor", "GPS")
+    item.put("latitude", locationData.getLatitude())
+    item.put("longitude", locationData.getLongitude())
+    item.put("altitude", locationData.getAltitude())
+    item.put("speed", locationData.getSpeed())
+    item.put("timestamp", now)
 
-      override def onSuccess() {
-        Log.i("AlarmSandboxDataProducer", "===> Entered onSuccess!!! <===");
-        item.put("_id", now + '-' + uuid)
-        item.put("sensor", "GPS")
-        item.put("latitude", locationData.getLatitude())
-        item.put("longitude", locationData.getLongitude())
-        item.put("altitude", locationData.getAltitude())
-        item.put("speed", locationData.getSpeed())
-        item.put("timestamp", now)
-
-        dbConnector.create(item)
-        database.close()
-      }
-    }
-    asyncTask.execute()
+    dbConnector.create(item)
 
   }
 
