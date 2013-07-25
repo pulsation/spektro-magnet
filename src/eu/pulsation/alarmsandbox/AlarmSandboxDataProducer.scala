@@ -121,10 +121,40 @@ trait AlarmSandboxSensorDataProducer extends AlarmSandboxDataProducer {
     val document = super.getDocument()
     val values = sensorData.values.toSet
 
+    def putXyz(v : Set[Float]) = {
+      document.put("x", v(1))
+      document.put("y", v(2))
+      document.put("z", v(3))
+    }
+
     document.put("sensorType", sensorTypes(sensorData.sensor.getType()))
     document.put("sensorName", sensorData.sensor.getName())
     
-    values.foreach(v => document.put("value", v))
+    sensorData.sensor.getType() match {
+
+      // 3D coordinates
+      case Sensor.TYPE_ACCELEROMETER
+          |Sensor.TYPE_GRAVITY
+          |Sensor.TYPE_GYROSCOPE
+          |Sensor.TYPE_LINEAR_ACCELERATION
+          |Sensor.TYPE_MAGNETIC_FIELD
+          |Sensor.TYPE_ORIENTATION
+          |Sensor.TYPE_ROTATION_VECTOR
+          => putXyz(values)
+      
+      // Only one value
+      case Sensor.TYPE_AMBIENT_TEMPERATURE
+          |Sensor.TYPE_LIGHT
+          |Sensor.TYPE_PRESSURE
+          |Sensor.TYPE_PROXIMITY
+          |Sensor.TYPE_RELATIVE_HUMIDITY
+          |Sensor.TYPE_TEMPERATURE
+          => document.put("value", values(1))
+      
+      // Other cases
+      case _ => values.zipWithIndex.foreach{ case (i, v) => document.put("value" + i, v)}
+    }
+//    
 
     document
   }
