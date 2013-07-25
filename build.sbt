@@ -6,6 +6,16 @@ android.Plugin.androidBuild
 
 name := "AlarmSandbox"
 
+proguardOptions in Android ++= Seq(
+    "-keepattributes *Annotation*,EnclosingMethod",
+    "-keep public enum * { public static **[] values(); public static ** valueOf(java.lang.String); }",
+    "-keepnames class com.codehaus.jackson.** { *; }",
+    "-keep class org.ektorp.** { *; }",
+    "-keep class com.couchbase.cblite.router.CBLRouter { *; }",
+    "-keep class com.couchbase.touchdb.TDCollateJSON { *; }",
+    "-keepclasseswithmembers class * { native <methods>; }"
+)
+
 proguardOptions in Android ++= Seq("-dontobfuscate", "-dontoptimize", "-keep class com.couchbase.touchdb.TDCollateJSON",
  "-dontwarn org.apache.http.**",
  "-dontwarn org.joda.time.**",

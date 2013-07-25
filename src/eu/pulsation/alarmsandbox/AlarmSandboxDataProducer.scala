@@ -34,10 +34,12 @@ trait AlarmSandboxDataProducer {
     new CBLServer(filesDir) 
   }
 
+  /*
   lazy val database : CBLDatabase = {
     Log.i("AlarmSandboxDataProducer", "Before database")
     server.getDatabaseNamed("alarmsandbox", true)
   }
+  */
 
   lazy val httpClient : HttpClient = {
     Log.i("AlarmSandboxDataProducer", "Before httpclient")
@@ -45,10 +47,7 @@ trait AlarmSandboxDataProducer {
   }
 
   lazy val dbInstance : CouchDbInstance = {
-/*    
-    database.open()
-    database.close()
-*/
+
     Log.i("AlarmSandboxDataProducer", "Before dbInstance")
     new StdCouchDbInstance(httpClient)
   }
@@ -82,7 +81,6 @@ trait AlarmSandboxLocationDataProducer extends AlarmSandboxDataProducer {
 
     val now = dateFormatter.format(new Date())
 
-    Log.i("AlarmSandboxDataProducer", "===> Entered onSuccess!!! <===");
     item.put("_id", now + '-' + uuid)
     item.put("sensor", "GPS")
     item.put("latitude", locationData.getLatitude())
