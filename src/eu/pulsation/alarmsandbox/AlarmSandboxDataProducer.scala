@@ -44,8 +44,6 @@ trait AlarmSandboxDataProducer {
 
   def getDocument() : ObjectNode = {
 
-    Log.v("AlarmSandboxDataProducer", "===> Initializing document <===")
-
     val document:ObjectNode = JsonNodeFactory.instance.objectNode()
 
     val dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSZ")
@@ -129,32 +127,9 @@ trait AlarmSandboxSensorDataProducer extends AlarmSandboxDataProducer {
 
     document.put("sensorType", sensorTypes(sensorData.sensor.getType()))
     document.put("sensorName", sensorData.sensor.getName())
-    
-    sensorData.sensor.getType() match {
 
-      // 3D coordinates
-      case Sensor.TYPE_ACCELEROMETER
-          |Sensor.TYPE_GRAVITY
-          |Sensor.TYPE_GYROSCOPE
-          |Sensor.TYPE_LINEAR_ACCELERATION
-          |Sensor.TYPE_MAGNETIC_FIELD
-          |Sensor.TYPE_ORIENTATION
-          |Sensor.TYPE_ROTATION_VECTOR
-          => putXyz(values)
-      
-      // Only one value
-      case Sensor.TYPE_AMBIENT_TEMPERATURE
-          |Sensor.TYPE_LIGHT
-          |Sensor.TYPE_PRESSURE
-          |Sensor.TYPE_PROXIMITY
-          |Sensor.TYPE_RELATIVE_HUMIDITY
-          |Sensor.TYPE_TEMPERATURE
-          => document.put("value", values(1))
-      
-      // Other cases
-      case _ => values.zipWithIndex.foreach{ case (i, v) => document.put("value" + i, v)}
-    }
-//    
+    // TODO: Use an ArrayNode instance to store values
+    values.zipWithIndex.foreach{ case (i, v) => document.put("value" + i, v)}
 
     document
   }

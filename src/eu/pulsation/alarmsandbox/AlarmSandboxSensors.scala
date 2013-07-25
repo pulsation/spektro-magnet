@@ -7,7 +7,7 @@ import java.util.Date
 
 import scala.collection.JavaConversions._
 
-class AlarmSandboxSensors(override val context: Context) extends SensorEventListener with AlarmSandboxDataProducer {
+class AlarmSandboxSensors(override val context: Context) extends SensorEventListener with AlarmSandboxSensorDataProducer {
 
   def getSensorManager() = {
     context.getSystemService(Context.SENSOR_SERVICE) match {
@@ -30,10 +30,12 @@ class AlarmSandboxSensors(override val context: Context) extends SensorEventList
 
   def onSensorChanged(event: SensorEvent) {
     // We don't care if the date is not accurate.
+/*    
     val date = new Date()
     val values = event.values.toSet
     Log.i("AlarmSandboxSensors", "===> " + event.sensor.getName() + " values received at " + date + " ! <===")
-    values.foreach(v => Log.i("AlarmSandboxSensors", "===> " + event.sensor.getName() + ": " + v + " <==="))
+    values.foreach(v => Log.i("AlarmSandboxSensors", "===> " + event.sensor.getName() + ": " + v + " <==="))*/
+    this.insertSensorData(event)
     sensorManager.unregisterListener(this)
   }
 
