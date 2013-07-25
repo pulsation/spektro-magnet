@@ -3,6 +3,8 @@ package eu.pulsation.alarmsandbox
 import java.text.SimpleDateFormat
 import java.util.{UUID, Date}
 
+import scala.collection.immutable.HashMap
+
 import org.codehaus.jackson.node.ObjectNode
 import org.codehaus.jackson.node.JsonNodeFactory
 
@@ -16,7 +18,7 @@ import org.ektorp.impl.StdCouchDbInstance
 import org.ektorp.android.util.EktorpAsyncTask
 import org.ektorp.DbAccessException
 
-import android.hardware.SensorEvent
+import android.hardware.{SensorEvent, Sensor}
 import android.content.Context
 
 import android.util.Log
@@ -71,7 +73,7 @@ trait AlarmSandboxLocationDataProducer extends AlarmSandboxDataProducer {
   override def getDocument() : ObjectNode = {
     val document = super.getDocument()
 
-    document.put("sensor", "GPS")
+    document.put("sensorType", "GPS")
     document.put("latitude", locationData.getLatitude())
     document.put("longitude", locationData.getLongitude())
     if (locationData.hasAltitude()) {
@@ -97,13 +99,35 @@ trait AlarmSandboxLocationDataProducer extends AlarmSandboxDataProducer {
 
 trait AlarmSandboxSensorDataProducer extends AlarmSandboxDataProducer {
 
+  var sensorData : SensorEvent = null
+
+  val sensorTypes = HashMap(
+    Sensor.TYPE_ACCELEROMETER -> "Accelerometer",
+    Sensor.TYPE_AMBIENT_TEMPERATURE -> "AmbientTemperature",
+    Sensor.TYPE_GRAVITY -> "Gravity",
+    Sensor.TYPE_GYROSCOPE -> "Gyroscope",
+    Sensor.TYPE_LIGHT -> "Light",
+    Sensor.TYPE_LINEAR_ACCELERATION -> "LinearAcceleration",
+    Sensor.TYPE_MAGNETIC_FIELD -> "MagneticField",
+    Sensor.TYPE_ORIENTATION -> "Orientation",
+    Sensor.TYPE_PRESSURE -> "Pressure",
+    Sensor.TYPE_PROXIMITY -> "Proximity",
+    Sensor.TYPE_RELATIVE_HUMIDITY -> "RelativeHumidity",
+    Sensor.TYPE_ROTATION_VECTOR -> "RotationVector",
+    Sensor.TYPE_TEMPERATURE -> "Temperature"
+  )
+
   override def getDocument() : ObjectNode = {
     val document = super.getDocument()
+    val values = sensorData.values.toSet
+
+    document.put("sensorType", sensorTypes(sensorData.sensor.getType()))
+    document.put("sensorName", sensorData.sensor.getName())
+    
+    values.foreach(v => document.put("value", v))
 
     document
   }
-
-  var sensorData : SensorEvent = null
 
   def insertSensorData(sensor: SensorEvent) {
     sensorData = sensor
