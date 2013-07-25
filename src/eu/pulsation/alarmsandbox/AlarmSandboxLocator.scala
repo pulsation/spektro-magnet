@@ -19,7 +19,7 @@ class AlarmSandboxLocator(override val context: Context) extends LocationListene
     // val date = new Date()
 
     Log.i("AlarmSandboxLocator", "===> Got location update <===")
-    this.insertData(location)
+    this.insertLocationData(location)
   }
 
   def onProviderDisabled (provider: String) = {}

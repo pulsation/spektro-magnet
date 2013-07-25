@@ -30,35 +30,34 @@ trait AlarmSandboxDataProducer {
 
   lazy val server : CBLServer = {
     val filesDir:String = context.getFilesDir().getAbsolutePath()
-    Log.i("AlarmSandboxDataProducer", "===> filesDir: " + filesDir + " <===")
     new CBLServer(filesDir) 
   }
 
-  /*
-  lazy val database : CBLDatabase = {
-    Log.i("AlarmSandboxDataProducer", "Before database")
-    server.getDatabaseNamed("alarmsandbox", true)
+  lazy val httpClient : HttpClient = new CBLiteHttpClient(server)  
+
+  lazy val dbInstance : CouchDbInstance = new StdCouchDbInstance(httpClient)
+
+  lazy val dbConnector = dbInstance.createConnector("alarmsandbox", true)
+
+
+  def getDocument() : ObjectNode = {
+
+    Log.v("AlarmSandboxDataProducer", "===> Initializing document <===")
+
+    val document:ObjectNode = JsonNodeFactory.instance.objectNode()
+
+    val dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSZ")
+    val uuid = UUID.randomUUID()
+    val now = dateFormatter.format(new Date())
+
+    document.put("_id", now + '-' + uuid)
+    document.put("timestamp", now)
+   
+    document
   }
-  */
 
-  lazy val httpClient : HttpClient = {
-    Log.i("AlarmSandboxDataProducer", "Before httpclient")
-    new CBLiteHttpClient(server)  
-  }
-
-  lazy val dbInstance : CouchDbInstance = {
-
-    Log.i("AlarmSandboxDataProducer", "Before dbInstance")
-    new StdCouchDbInstance(httpClient)
-  }
-
-  lazy val dbConnector = {
-    Log.i("AlarmSandboxProducer", "===> Before createConnector <===")
-    var inst = dbInstance
-    Log.i("AlarmSandboxProducer", "dbInstance fetched")
-    val cn = inst.createConnector("alarmsandbox", true)
-    Log.i("AlarmSandboxProducer", "===> After createConnector <===")
-    cn
+  def insertDocument() = {
+    dbConnector.create(getDocument())
   }
 }
 
@@ -67,36 +66,48 @@ import android.location.Location
 
 trait AlarmSandboxLocationDataProducer extends AlarmSandboxDataProducer {
 
+  var locationData : Location = null
+
+  override def getDocument() : ObjectNode = {
+    val document = super.getDocument()
+
+    document.put("sensor", "GPS")
+    document.put("latitude", locationData.getLatitude())
+    document.put("longitude", locationData.getLongitude())
+    if (locationData.hasAltitude()) {
+      document.put("altitude", locationData.getAltitude())
+    }
+    if (locationData.hasSpeed()) {
+      document.put("speed", locationData.getSpeed())
+    }
+
+    document
+  }
+
   /**
    * Insert location data in the database.
    */
-  def insertData(locationData: Location) {
-
-    Log.i("AlarmSandboxDataProducer", "===> About to insert location data <===");
-
-    val item:ObjectNode = JsonNodeFactory.instance.objectNode()
-
-    val dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSZ")
-    val uuid = UUID.randomUUID()
-
-    val now = dateFormatter.format(new Date())
-
-    item.put("_id", now + '-' + uuid)
-    item.put("sensor", "GPS")
-    item.put("latitude", locationData.getLatitude())
-    item.put("longitude", locationData.getLongitude())
-    item.put("altitude", locationData.getAltitude())
-    item.put("speed", locationData.getSpeed())
-    item.put("timestamp", now)
-
-    dbConnector.create(item)
+  def insertLocationData(location: Location) {
+    locationData = location
+    insertDocument()
 
   }
 
 }
 
 trait AlarmSandboxSensorDataProducer extends AlarmSandboxDataProducer {
-  def insertData(sensorData: SensorEvent) {
+
+  override def getDocument() : ObjectNode = {
+    val document = super.getDocument()
+
+    document
+  }
+
+  var sensorData : SensorEvent = null
+
+  def insertSensorData(sensor: SensorEvent) {
+    sensorData = sensor
+    insertDocument()
   }
 }
 
