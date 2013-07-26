@@ -2,7 +2,7 @@ package eu.pulsation.alarmsandbox
 
 import android.hardware.{SensorEvent, Sensor}
 
-import org.codehaus.jackson.node.ObjectNode
+import org.codehaus.jackson.node.{ObjectNode, ArrayNode}
 import scala.collection.immutable.HashMap
 
 trait AlarmSandboxSensorDataProducer extends AlarmSandboxDataProducer {
@@ -28,18 +28,14 @@ trait AlarmSandboxSensorDataProducer extends AlarmSandboxDataProducer {
   override def getDocument() : ObjectNode = {
     val document = super.getDocument()
     val values = sensorData.values.toSet
+    val jsonValues: ArrayNode = document.putArray("values")
 
-    def putXyz(v : Set[Float]) = {
-      document.put("x", v(1))
-      document.put("y", v(2))
-      document.put("z", v(3))
-    }
-
+    // Sensor characteristics
     document.put("sensorType", sensorTypes(sensorData.sensor.getType()))
     document.put("sensorName", sensorData.sensor.getName())
 
-    // TODO: Use an ArrayNode instance to store values
-    values.zipWithIndex.foreach{ case (i, v) => document.put("value" + i, v)}
+    // Sensor values
+    values.foreach{ v => jsonValues.add(v)}
 
     document
   }
