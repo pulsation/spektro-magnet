@@ -32,6 +32,7 @@ trait AlarmSandboxSensorDataProducer extends AlarmSandboxDataProducer {
 
     // Sensor characteristics
     document.put("sensorType", sensorTypes(sensorData.sensor.getType()))
+    document.put("androidType", sensorData.sensor.getType())
     document.put("sensorName", sensorData.sensor.getName())
 
     // Sensor values
