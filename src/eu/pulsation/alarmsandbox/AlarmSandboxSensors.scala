@@ -20,7 +20,6 @@ class AlarmSandboxSensors(override val context: Context) extends SensorEventList
   val allSensors = sensorManager.getSensorList(Sensor.TYPE_ALL).toSet
 
   def subscribeSensor(s: Sensor) = {
-    Log.i("AlarmSandboxSensors", "===> Available sensor: " + s.getType() + "(" + s.getName() + ") <===")
     val sensor = sensorManager.getDefaultSensor(s.getType())
     sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
   }
@@ -29,14 +28,8 @@ class AlarmSandboxSensors(override val context: Context) extends SensorEventList
 
 
   def onSensorChanged(event: SensorEvent) {
-    // We don't care if the date is not accurate.
-/*    
-    val date = new Date()
-    val values = event.values.toSet
-    Log.i("AlarmSandboxSensors", "===> " + event.sensor.getName() + " values received at " + date + " ! <===")
-    values.foreach(v => Log.i("AlarmSandboxSensors", "===> " + event.sensor.getName() + ": " + v + " <==="))*/
-    this.insertSensorData(event)
     sensorManager.unregisterListener(this)
+    this.insertSensorData(event)
   }
 
   def onAccuracyChanged(sensor: Sensor, accuracy: Int) = {}

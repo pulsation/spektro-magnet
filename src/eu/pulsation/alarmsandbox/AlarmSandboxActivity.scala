@@ -20,6 +20,7 @@ class AlarmSandboxActivity extends Activity
      CBLURLStreamHandlerFactory.registerSelfIgnoreError()
 
      new AlarmSandboxHelper(this).addAlarm()
+
      setContentView(R.layout.main)
    }
 }

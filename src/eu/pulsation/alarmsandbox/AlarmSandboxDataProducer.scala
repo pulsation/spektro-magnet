@@ -7,7 +7,7 @@ import scala.collection.immutable.HashMap
 
 import org.codehaus.jackson.node.{JsonNodeFactory, ObjectNode}
 
-import com.couchbase.cblite.{CBLServer, CBLDatabase}
+import com.couchbase.cblite.CBLServer
 import com.couchbase.cblite.ektorp.CBLiteHttpClient
 import com.couchbase.cblite.router.CBLURLConnection
 
@@ -40,7 +40,6 @@ trait AlarmSandboxDataProducer {
 
   lazy val dbConnector = dbInstance.createConnector("alarmsandbox", true)
 
-
   def getDocument() : ObjectNode = {
 
     val document:ObjectNode = JsonNodeFactory.instance.objectNode()
@@ -56,6 +55,7 @@ trait AlarmSandboxDataProducer {
   }
 
   def insertDocument() = {
+    Log.v("AlarmSandboxDataProducer", "===> Writing data to local database <===")
     dbConnector.create(getDocument())
   }
 }
