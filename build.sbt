@@ -6,6 +6,8 @@ android.Plugin.androidBuild
 
 name := "AlarmSandbox"
 
+scalacOptions += "-deprecation"
+
 proguardOptions in Android ++= Seq(
     "-keepattributes *Annotation*,EnclosingMethod",
     "-keep public enum * { public static **[] values(); public static ** valueOf(java.lang.String); }",
