@@ -40,6 +40,9 @@ trait AlarmSandboxDataProducer {
 
   lazy val dbConnector = dbInstance.createConnector("alarmsandbox", true)
 
+  /**
+   * Returns the document to be inserted in the database.
+   */
   def getDocument() : ObjectNode = {
 
     val document:ObjectNode = JsonNodeFactory.instance.objectNode()
@@ -54,11 +57,11 @@ trait AlarmSandboxDataProducer {
     document
   }
 
+  /**
+   * Inserts document in the local database.
+   */
   def insertDocument() = {
     Log.v("AlarmSandboxDataProducer", "===> Writing data to local database <===")
     dbConnector.create(getDocument())
   }
 }
-
-
-

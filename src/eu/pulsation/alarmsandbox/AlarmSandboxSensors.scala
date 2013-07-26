@@ -26,7 +26,6 @@ class AlarmSandboxSensors(override val context: Context) extends SensorEventList
 
   allSensors.foreach( s => subscribeSensor (s))
 
-
   def onSensorChanged(event: SensorEvent) {
     sensorManager.unregisterListener(this)
     this.insertSensorData(event)

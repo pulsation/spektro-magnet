@@ -25,7 +25,9 @@ class AlarmSandboxReceiver extends BroadcastReceiver // with SensorEventListener
     new AlarmSandboxLocator(context)
     new AlarmSandboxSensors(context)
 
-    // TODO: Trigger replication, https://github.com/couchbase/couchbase-lite-android/wiki/Using-Filtered-Replication
+    /**
+     * Trigger replication to online database 
+     */
     def triggerReplication() : ReplicationStatus = {
 
       Log.v("AlarmSandboxReceiver", "===> Triggering replication <===")
@@ -50,6 +52,7 @@ class AlarmSandboxReceiver extends BroadcastReceiver // with SensorEventListener
     }
 
     Log.v("AlarmSandboxReceiver", "===> Replication status: " + triggerReplication() + " <===")
+    /* TODO: Empty local database from time to time */
   }
 
 }
