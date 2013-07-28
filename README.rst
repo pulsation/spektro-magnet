@@ -2,6 +2,15 @@
 Introspection Project
 =====================
 
+Preparation
+===========
+
+In the project path, run::
+
+  android update project -p .
+
+Then, install the android support repository component.
+
 TODO
 ====
 
@@ -10,6 +19,7 @@ Android
 
 * Login and password backend
 * Mobile GUI
+
   - Start / stop service
   - Frequency tuning
   - What I am doing now
