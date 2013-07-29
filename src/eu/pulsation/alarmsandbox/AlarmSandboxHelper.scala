@@ -24,8 +24,7 @@ class AlarmSandboxHelper(context: Context) {
     }
   }
 
-  def addAlarm() {
-
+  def startAlarm() {
 
     val am:AlarmManager = this.getAlarmManager()
 
@@ -46,7 +45,7 @@ class AlarmSandboxHelper(context: Context) {
   /**
    * @see LocalNotification#cancelNotification(int)
    */
-  def cancelAlarm() = {
+  def stopAlarm() = {
     // TODO
 
     val intent : Intent = new Intent(context, classOf[AlarmSandboxReceiver])

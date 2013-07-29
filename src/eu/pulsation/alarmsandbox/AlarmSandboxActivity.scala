@@ -4,20 +4,54 @@ import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import com.couchbase.cblite.router.CBLURLStreamHandlerFactory
+import android.widget.Button
+import android.widget.TextView
+import android.view.View
+import android.view.View.OnClickListener
 
-class AlarmSandboxActivity extends Activity
-{
+class AlarmSandboxActivity extends Activity {
   /** Called when the activity is first created. */
-   override def onCreate(savedInstanceState: Bundle)
-   {
-     super.onCreate(savedInstanceState)
+    override def onCreate(savedInstanceState: Bundle) {
 
-     // c.f. https://github.com/couchbase/couchbase-lite-android/wiki/FAQ-Android#q-why-do-i-see-a-message-like-javanetmalformedurlexception-unknown-protocol-cblite
-     CBLURLStreamHandlerFactory.registerSelfIgnoreError()
+      lazy val alarmSandboxHelper = {
+        new AlarmSandboxHelper(this)
+      }
 
-     new AlarmSandboxHelper(this).addAlarm()
+      lazy val statusTxt : TextView = {
+        this.findViewById(R.id.StatusTxt) match {
+          case txt: TextView => txt
+          case _ => throw new ClassCastException
+        }
+      } 
 
-     setContentView(R.layout.main)
+      lazy val startServiceBtn = {
+        this.findViewById(R.id.StartServiceBtn)
+      }
+
+      lazy val stopServiceBtn = {
+        this.findViewById(R.id.StopServiceBtn)
+      }
+      super.onCreate(savedInstanceState)
+
+      // c.f. https://github.com/couchbase/couchbase-lite-android/wiki/FAQ-Android#q-why-do-i-see-a-message-like-javanetmalformedurlexception-unknown-protocol-cblite
+      CBLURLStreamHandlerFactory.registerSelfIgnoreError()
+
+      setContentView(R.layout.main)
+
+      // Buttons
+      startServiceBtn.setOnClickListener(new OnClickListener() {
+        def onClick(v : View) {
+          alarmSandboxHelper.startAlarm()
+          statusTxt.append("\nService started.");
+       }
+     })
+
+      stopServiceBtn.setOnClickListener(new OnClickListener() {
+        def onClick(v : View) {
+          alarmSandboxHelper.stopAlarm()
+          statusTxt.append("\nService stopped.");
+       }
+     })
    }
 }
 
