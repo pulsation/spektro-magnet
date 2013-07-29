@@ -17,16 +17,17 @@ import android.util.Log
  */
 class AlarmSandboxHelper(context: Context) {
 
+  private def getAlarmManager() : AlarmManager = {
+    context.getSystemService(Context.ALARM_SERVICE) match {
+      case am: AlarmManager => am
+      case _ => throw new ClassCastException
+    }
+  }
+
   def addAlarm() {
 
-    def getAlarmManager() : AlarmManager = {
-      context.getSystemService(Context.ALARM_SERVICE) match {
-        case am: AlarmManager => am
-        case _ => throw new ClassCastException
-      }
-    }
 
-    val am:AlarmManager = getAlarmManager()
+    val am:AlarmManager = this.getAlarmManager()
 
     val sandboxBroadcastReceiver:BroadcastReceiver = new AlarmSandboxReceiver()
 
@@ -45,8 +46,16 @@ class AlarmSandboxHelper(context: Context) {
   /**
    * @see LocalNotification#cancelNotification(int)
    */
-  def cancelAlarm() {
+  def cancelAlarm() = {
     // TODO
+
+    val intent : Intent = new Intent(context, classOf[AlarmSandboxReceiver])
+    intent.setAction("my.alarm.action")
+
+    val pi : PendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT)
+    val am : AlarmManager = this.getAlarmManager()
+
+    am.cancel(pi)
   }
 
 }
