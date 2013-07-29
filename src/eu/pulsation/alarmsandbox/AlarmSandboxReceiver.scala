@@ -43,7 +43,7 @@ class AlarmSandboxReceiver extends BroadcastReceiver // with SensorEventListener
 
       val pushCommand  : ReplicationCommand= new ReplicationCommand.Builder()
           .source("alarmsandbox")
-          .target("https://alarmsandbox:WhyejBild0@pulsation.iriscouch.com:6984" + "/alarmsandbox")
+          .target("https://alarmsandbox:WhyejBild0@www.pulsation.eu:6984" + "/alarmsandbox")
           .continuous(false)
           .build();
 
