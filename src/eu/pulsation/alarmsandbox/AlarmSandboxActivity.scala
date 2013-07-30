@@ -40,7 +40,7 @@ class AlarmSandboxActivity extends Activity {
 
     setContentView(R.layout.main)
 
-    // Buttons
+    // Bind buttons
     startServiceBtn.setOnClickListener(new OnClickListener() {
       def onClick(v : View) {
         alarmSandboxHelper.startAlarm()
