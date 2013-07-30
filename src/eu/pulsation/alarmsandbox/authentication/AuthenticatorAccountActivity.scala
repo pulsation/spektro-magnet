@@ -10,7 +10,6 @@ import android.accounts.Account
 
 class AuthenticatorAccountActivity extends AccountAuthenticatorActivity { self =>
   val AccountType : String = "eu.pulsation.alarmsandbox.couchdb"
-  val that = this
 
   override def onCreate(savedInstanceState: Bundle) {
 
