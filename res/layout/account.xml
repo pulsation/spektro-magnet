@@ -4,23 +4,30 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-  <Button 
-    android:id="@+id/StartServiceBtn"
-    android:text="Start service"
+
+  <TextView      
+    android:text="Login"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     />
-  <Button 
-    android:id="@+id/StopServiceBtn"
-    android:text="Stop service"
+  <EditText android:id="@+id/LoginField"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     />
-  <TextView
+
+  <TextView      
+    android:text="Password"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/StatusTxt"
-    android:text="Ready."
+    />
+  <EditText android:id="@+id/PasswordField"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    />
+
+  <Button 
+    android:id="@+id/ProceedBtn"
+    android:text="Proceed"
     />
 
 </LinearLayout>
