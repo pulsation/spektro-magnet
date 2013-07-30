@@ -30,7 +30,7 @@ class Authenticator(context : Context) extends AbstractAccountAuthenticator(cont
       val reply : Bundle = new Bundle()
       val i : Intent = new Intent(context, classOf[AuthenticatorAccountActivity])
 
-      return reply
+      reply
   }
 
 }

@@ -8,7 +8,7 @@ import android.view.View.OnClickListener
 import android.view.View
 import android.accounts.Account
 
-class AuthenticatorAccountActivity extends AccountAuthenticatorActivity {
+class AuthenticatorAccountActivity extends AccountAuthenticatorActivity { self =>
   val AccountType : String = "eu.pulsation.alarmsandbox.couchdb"
   val that = this
 
@@ -38,8 +38,6 @@ class AuthenticatorAccountActivity extends AccountAuthenticatorActivity {
     lazy val login = loginField.getText().toString()
     lazy val password = passwordField.getText().toString()
 
-    val that = this
-
     super.onCreate(savedInstanceState)
     setContentView(R.layout.account)
 
@@ -48,8 +46,8 @@ class AuthenticatorAccountActivity extends AccountAuthenticatorActivity {
       def onClick(v: View) {
         val account : Account = new Account(login, AccountType)
 
-        AccountManager.get(that).addAccountExplicitly(account, password, null)
-        that.finish()
+        AccountManager.get(self).addAccountExplicitly(account, password, null)
+        self.finish()
       }
     })
   }
