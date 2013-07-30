@@ -1,4 +1,6 @@
-import android.content.Context
+package eu.pulsation.alarmsandbox
+
+import android.content.{Context, Intent}
 import android.os.Bundle
 
 import android.accounts.{AbstractAccountAuthenticator, AccountAuthenticatorResponse, Account}
@@ -25,7 +27,10 @@ class Authenticator(context : Context) extends AbstractAccountAuthenticator(cont
    */
   def addAccount(response : AccountAuthenticatorResponse, accountType : String, authTokenType : String, requiredFeatures: Array[String],
     options : Bundle) : Bundle = {
-      null
+      val reply : Bundle = new Bundle()
+      val i : Intent = new Intent(context, classOf[AuthenticatorAccountActivity])
+
+      return reply
   }
 
 }
