@@ -1,12 +1,11 @@
 package eu.pulsation.alarmsandbox
 
-import android.accounts.{AccountAuthenticatorActivity, AccountManager}
+import android.accounts.{AccountAuthenticatorActivity, AccountManager, Account}
 import android.os.Bundle
 import android.app.Activity
 import android.widget.{Button, EditText}
 import android.view.View.OnClickListener
 import android.view.View
-import android.accounts.Account
 
 class AlarmSandboxAccountActivity extends AccountAuthenticatorActivity { self =>
   val AccountType : String = "eu.pulsation.alarmsandbox.couchdb"
