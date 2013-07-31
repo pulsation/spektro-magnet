@@ -15,10 +15,11 @@ proguardOptions in Android ++= Seq(
     "-keep class org.ektorp.** { *; }",
     "-keep class com.couchbase.cblite.router.CBLRouter { *; }",
     "-keep class com.couchbase.touchdb.TDCollateJSON { *; }",
-    "-keepclasseswithmembers class * { native <methods>; }"
+    "-keepclasseswithmembers class * { native <methods>; }",
+    "-keep class eu.pulsation.alarmsandbox.AlarmSandboxAuthenticator { *; }"
 )
 
-proguardOptions in Android ++= Seq("-dontobfuscate", "-dontoptimize", "-keep class com.couchbase.touchdb.TDCollateJSON",
+proguardOptions in Android ++= Seq("-dontobfuscate", "-dontoptimize",
  "-dontwarn org.apache.http.**",
  "-dontwarn org.joda.time.**",
  "-dontwarn javax.servlet.**",

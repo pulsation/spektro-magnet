@@ -8,8 +8,8 @@ import android.accounts.{AbstractAccountAuthenticator, AccountAuthenticatorRespo
 /**
  * Implementation based on http://www.c99.org/2010/01/23/writing-an-android-sync-provider-part-1/
  */
-class Authenticator(context : Context) extends AbstractAccountAuthenticator(context : Context) {
-  
+class AlarmSandboxAuthenticator(context : Context) extends AbstractAccountAuthenticator(context : Context) {
+
   def hasFeatures(response : AccountAuthenticatorResponse, account: Account , features: Array [String]) : Bundle = { null }
 
   def updateCredentials(response : AccountAuthenticatorResponse , account: Account , authTokenType: String , options: Bundle) : Bundle = { null }
@@ -28,7 +28,7 @@ class Authenticator(context : Context) extends AbstractAccountAuthenticator(cont
   def addAccount(response : AccountAuthenticatorResponse, accountType : String, authTokenType : String, requiredFeatures: Array[String],
     options : Bundle) : Bundle = {
       val reply : Bundle = new Bundle()
-      val i : Intent = new Intent(context, classOf[AuthenticatorAccountActivity])
+      val i : Intent = new Intent(context, classOf[AlarmSandboxAccountActivity])
 
       reply
   }

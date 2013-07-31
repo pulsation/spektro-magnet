@@ -8,7 +8,7 @@ import android.view.View.OnClickListener
 import android.view.View
 import android.accounts.Account
 
-class AuthenticatorAccountActivity extends AccountAuthenticatorActivity { self =>
+class AlarmSandboxAccountActivity extends AccountAuthenticatorActivity { self =>
   val AccountType : String = "eu.pulsation.alarmsandbox.couchdb"
 
   override def onCreate(savedInstanceState: Bundle) {
