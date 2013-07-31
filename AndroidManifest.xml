@@ -9,14 +9,17 @@
   <uses-permission android:name="android.permission.INTERNET" />
   <application android:label="@string/app_name" android:icon="@drawable/ic_launcher">
 
-    <service android:name="AlarmSandboxAuthenticator"
-      android:exported="true" android:process=":auth">
+    <service android:name="AlarmSandboxAuthenticatorService"
+      android:process=":auth">
       <intent-filter>
         <action android:name="android.accounts.AccountAuthenticator" />
       </intent-filter>
       <meta-data android:name="android.accounts.AccountAuthenticator"
         android:resource="@xml/authenticator" />
     </service>
+
+    <activity android:name="AlarmSandboxAccountActivity"
+      android:label="@string/app_name" />
 
     <activity android:name="AlarmSandboxActivity"
       android:label="@string/app_name">

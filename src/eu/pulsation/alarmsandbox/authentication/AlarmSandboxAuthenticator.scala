@@ -3,12 +3,14 @@ package eu.pulsation.alarmsandbox
 import android.content.{Context, Intent}
 import android.os.Bundle
 
-import android.accounts.{AbstractAccountAuthenticator, AccountAuthenticatorResponse, Account}
+import android.accounts.{AbstractAccountAuthenticator, AccountAuthenticatorResponse, Account, AccountManager}
+
+import android.util.Log
 
 /**
  * Implementation based on http://www.c99.org/2010/01/23/writing-an-android-sync-provider-part-1/
  */
-class AlarmSandboxAuthenticator(context : Context) extends AbstractAccountAuthenticator(context : Context) {
+class AlarmSandboxAuthenticator (context : Context) extends AbstractAccountAuthenticator (context: Context) {
 
   def hasFeatures(response : AccountAuthenticatorResponse, account: Account , features: Array [String]) : Bundle = { null }
 
@@ -27,10 +29,14 @@ class AlarmSandboxAuthenticator(context : Context) extends AbstractAccountAuthen
    */
   def addAccount(response : AccountAuthenticatorResponse, accountType : String, authTokenType : String, requiredFeatures: Array[String],
     options : Bundle) : Bundle = {
-      val reply : Bundle = new Bundle()
-      val i : Intent = new Intent(context, classOf[AlarmSandboxAccountActivity])
+      val bundle: Bundle = new Bundle()
+      val intent : Intent = new Intent(context, classOf[AlarmSandboxAccountActivity])
 
-      reply
+      Log.i("AlarmSandboxAuthenticator", "Entered addAccount()")
+
+      intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response)
+      bundle.putParcelable(AccountManager.KEY_INTENT, intent)
+      bundle
   }
 
 }
