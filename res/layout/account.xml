@@ -14,6 +14,7 @@
       android:text="Server: "
       android:layout_width="130dip"
       android:layout_height="fill_parent"
+      android:gravity="right|center_vertical"
       />
     <EditText android:id="@+id/server_field"
       android:layout_width="fill_parent"
@@ -30,6 +31,7 @@
       android:text="Database: "
       android:layout_width="130dip"
       android:layout_height="fill_parent"
+      android:gravity="right|center_vertical"
       />
     <EditText android:id="@+id/database_field"
       android:layout_width="fill_parent"
@@ -46,6 +48,7 @@
       android:text="Login: "
       android:layout_width="130dip"
       android:layout_height="fill_parent"
+      android:gravity="right|center_vertical"
       />
     <EditText android:id="@+id/login_field"
       android:layout_width="fill_parent"
@@ -62,6 +65,7 @@
       android:text="Password: "
       android:layout_width="130dip"
       android:layout_height="fill_parent"
+      android:gravity="right|center_vertical"
       />
     <EditText android:id="@+id/password_field"
       android:layout_width="fill_parent"
