@@ -20,22 +20,19 @@ class AlarmSandboxAccountActivity extends AccountAuthenticatorActivity { self =>
       }
     }
 
-    lazy val loginField = {
-      this.findViewById(R.id.LoginField) match {
-          case txt : EditText => txt
-          case _ => throw new ClassCastException
-      }
-    }
-
-    lazy val passwordField = {
+    lazy val password = {
       this.findViewById(R.id.PasswordField) match {
-          case txt : EditText => txt
-          case _ => throw new ClassCastException
+        case txt : EditText => txt.getText().toString()
+        case _ => throw new ClassCastException
       }
     }
 
-    lazy val login = loginField.getText().toString()
-    lazy val password = passwordField.getText().toString()
+    lazy val login = { 
+      this.findViewById(R.id.LoginField) match {
+        case txt : EditText => txt.getText().toString()
+        case _ => throw new ClassCastException
+      }
+    }
 
     super.onCreate(savedInstanceState)
     setContentView(R.layout.account)
@@ -44,8 +41,12 @@ class AlarmSandboxAccountActivity extends AccountAuthenticatorActivity { self =>
     proceedBtn.setOnClickListener(new OnClickListener() {
       def onClick(v: View) {
         val account : Account = new Account(login, AccountType)
+        val accountInfo : Bundle = new Bundle()
 
-        AccountManager.get(self).addAccountExplicitly(account, password, null)
+        accountInfo.putCharSequence("server", "www.pulsation.eu")
+        accountInfo.putCharSequence("database", "alarmsandbox")
+
+        AccountManager.get(self).addAccountExplicitly(account, password, accountInfo)
         self.finish()
       }
     })
