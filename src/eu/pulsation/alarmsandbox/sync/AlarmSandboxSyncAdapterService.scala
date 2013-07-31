@@ -10,6 +10,8 @@ import android.os.{Bundle, IBinder}
 import android.content.{ContentProviderClient, AbstractThreadedSyncAdapter, SyncResult, Intent}
 import android.accounts.Account
 
+import android.util.Log
+
 object AlarmSandboxSyncAdapterService extends Service { self =>
 
   def onBind(intent: Intent) : IBinder = {
