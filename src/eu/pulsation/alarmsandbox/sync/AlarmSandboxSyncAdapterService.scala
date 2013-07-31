@@ -10,18 +10,16 @@ import android.os.{Bundle, IBinder}
 import android.content.{ContentProviderClient, AbstractThreadedSyncAdapter, SyncResult, Intent}
 import android.accounts.Account
 
-class AlarmSandboxSyncAdapterService extends Service {
+object AlarmSandboxSyncAdapterService extends Service { self =>
 
   def onBind(intent: Intent) : IBinder = {
     lazy val syncAdapter = { 
-        new AbstractThreadedSyncAdapter(this, true) {
-          def onPerformSync(account: Account, extras: Bundle, authority: String, provider: ContentProviderClient, syncResult: SyncResult) {
-            // AlarmSandboxSyncAdapterService.performSync()
-          }
+      new AbstractThreadedSyncAdapter(this, true) {
+        def onPerformSync(account: Account, extras: Bundle, authority: String, provider: ContentProviderClient, syncResult: SyncResult) {
+          AlarmSandboxSyncAdapterService.performSync(self, account, extras, authority, provider, syncResult)
         }
       }
-      
-      /*new SyncAdapterImpl(this, true)*/
+    }
     syncAdapter.getSyncAdapterBinder()
   }
 
