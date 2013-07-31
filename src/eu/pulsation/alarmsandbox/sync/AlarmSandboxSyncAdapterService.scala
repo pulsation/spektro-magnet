@@ -27,6 +27,7 @@ object AlarmSandboxSyncAdapterService extends Service { self =>
     syncResult: SyncResult) {
       val contentResolver = context.getContentResolver()
       // TODO: Implement synchronization
+      Log.i("AlarmSandboxSyncAdapterService", "Synchronization stub.")
   }
 }
 
