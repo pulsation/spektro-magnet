@@ -20,18 +20,18 @@ class AlarmSandboxActivity extends Activity {
     }
 
     lazy val statusTxt : TextView = {
-      this.findViewById(R.id.StatusTxt) match {
+      this.findViewById(R.id.status_txt) match {
         case txt: TextView => txt
         case _ => throw new ClassCastException
       }
     } 
 
     lazy val startServiceBtn = {
-      this.findViewById(R.id.StartServiceBtn)
+      this.findViewById(R.id.start_service_btn)
     }
 
     lazy val stopServiceBtn = {
-      this.findViewById(R.id.StopServiceBtn)
+      this.findViewById(R.id.stop_service_btn)
     }
     super.onCreate(savedInstanceState)
 

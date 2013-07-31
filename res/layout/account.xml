@@ -15,7 +15,7 @@
       android:layout_width="130dip"
       android:layout_height="fill_parent"
       />
-    <EditText android:id="@+id/LoginField"
+    <EditText android:id="@+id/login_field"
       android:layout_width="fill_parent"
       android:layout_height="fill_parent"
       />
@@ -31,13 +31,13 @@
       android:layout_width="130dip"
       android:layout_height="fill_parent"
       />
-    <EditText android:id="@+id/PasswordField"
+    <EditText android:id="@+id/password_field"
       android:layout_width="fill_parent"
       android:layout_height="fill_parent"
       />
     </LinearLayout>
   <Button 
-    android:id="@+id/ProceedBtn"
+    android:id="@+id/proceed_btn"
     android:text="Proceed"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"

@@ -14,21 +14,21 @@ class AlarmSandboxAccountActivity extends AccountAuthenticatorActivity { self =>
   override def onCreate(savedInstanceState: Bundle) {
 
     lazy val proceedBtn = {
-      this.findViewById(R.id.ProceedBtn) match {
+      this.findViewById(R.id.proceed_btn) match {
         case btn : Button => btn
         case _ => throw new ClassCastException
       }
     }
 
     lazy val password = {
-      this.findViewById(R.id.PasswordField) match {
+      this.findViewById(R.id.password_field) match {
         case txt : EditText => txt.getText().toString()
         case _ => throw new ClassCastException
       }
     }
 
     lazy val login = { 
-      this.findViewById(R.id.LoginField) match {
+      this.findViewById(R.id.login_field) match {
         case txt : EditText => txt.getText().toString()
         case _ => throw new ClassCastException
       }
