@@ -11,6 +11,38 @@
     >
 
     <TextView      
+      android:text="Server: "
+      android:layout_width="130dip"
+      android:layout_height="fill_parent"
+      />
+    <EditText android:id="@+id/server_field"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      />
+  </LinearLayout>
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <TextView      
+      android:text="Database: "
+      android:layout_width="130dip"
+      android:layout_height="fill_parent"
+      />
+    <EditText android:id="@+id/database_field"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      />
+  </LinearLayout>
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <TextView      
       android:text="Login: "
       android:layout_width="130dip"
       android:layout_height="fill_parent"
@@ -34,6 +66,7 @@
     <EditText android:id="@+id/password_field"
       android:layout_width="fill_parent"
       android:layout_height="fill_parent"
+      android:password="true"
       />
     </LinearLayout>
   <Button 
