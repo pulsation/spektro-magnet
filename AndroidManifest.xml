@@ -18,6 +18,15 @@
         android:resource="@xml/authenticator" />
     </service>
 
+    <service android:name=".sync.AlarmSandboxSyncAdapterService"
+      android:exported="true" android:process=":sync_data">
+      <intent-filter>
+        <action android:name="android.content.SyncAdapter" />
+      </intent-filter>
+      <meta-data android:name="android.content.SyncAdapter"
+        android:resource="@xml/sync_data" />
+    </service>
+
     <activity android:name="AlarmSandboxAccountActivity"
       android:label="@string/app_name" />
 
