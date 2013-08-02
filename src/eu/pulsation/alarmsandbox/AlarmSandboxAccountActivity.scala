@@ -7,6 +7,8 @@ import android.widget.{Button, EditText}
 import android.view.View.OnClickListener
 import android.view.View
 
+import android.content.ContentResolver
+
 class AlarmSandboxAccountActivity extends AccountAuthenticatorActivity { self =>
   val AccountType : String = "eu.pulsation.alarmsandbox.couchdb"
 
@@ -44,7 +46,9 @@ class AlarmSandboxAccountActivity extends AccountAuthenticatorActivity { self =>
 
         accountInfo.putCharSequence("server", "www.pulsation.eu")
         accountInfo.putCharSequence("database", "alarmsandbox")
-
+        
+        val extras : Bundle = new Bundle()
+        ContentResolver.addPeriodicSync(account, "my_authority", extras, 900)
         AccountManager.get(self).addAccountExplicitly(account, password, accountInfo)
         self.finish()
       }
