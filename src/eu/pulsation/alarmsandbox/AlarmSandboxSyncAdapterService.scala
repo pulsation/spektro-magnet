@@ -18,8 +18,7 @@ class AlarmSandboxSyncAdapterService extends Service { self =>
     lazy val syncAdapter = { 
       new AbstractThreadedSyncAdapter(this, true) {
         def onPerformSync(account: Account, extras: Bundle, authority: String, provider: ContentProviderClient, syncResult: SyncResult) {
-          //AlarmSandboxSyncAdapterService.performSync(self, account, extras, authority, provider, syncResult)
-          //this.performSync(self, account, extras, authority, provider, syncResult)
+          self.performSync(self, account, extras, authority, provider, syncResult)
         }
       }
     }
