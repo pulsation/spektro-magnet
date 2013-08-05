@@ -1,5 +1,6 @@
 <sync-adapter xmlns:android="http://schemas.android.com/apk/res/android"
     android:accountType="eu.pulsation.alarmsandbox.couchdb"
+    android:contentAuthority="eu.pulsation.alarmsandbox.content"
     android:userVisible="true"
     android:syncable="true"
     android:isAlwaysSyncable="true"

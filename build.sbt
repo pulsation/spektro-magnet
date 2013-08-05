@@ -17,7 +17,8 @@ proguardOptions in Android ++= Seq(
     "-keep class com.couchbase.touchdb.TDCollateJSON { *; }",
     "-keepclasseswithmembers class * { native <methods>; }",
     "-keep class eu.pulsation.alarmsandbox.AlarmSandboxAuthenticator { *; }",
-    "-keep class eu.pulsation.alarmsandbox.AlarmSandboxSyncAdapterService { *; }"
+    "-keep class eu.pulsation.alarmsandbox.AlarmSandboxSyncAdapterService { *; }",
+    "-keep class eu.pulsation.alarmsandbox.AlarmSandboxContentProvider { *; }"
 )
 
 proguardOptions in Android ++= Seq("-dontobfuscate", "-dontoptimize",

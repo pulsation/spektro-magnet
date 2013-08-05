@@ -3,6 +3,7 @@ package eu.pulsation.alarmsandbox
 import android.content.{BroadcastReceiver, Context, Intent}
 import android.hardware.Sensor
 import android.util.Log
+import android.accounts
 
 import org.ektorp.{ReplicationCommand, ReplicationStatus, CouchDbConnector, CouchDbInstance}
 import org.ektorp.http.HttpClient
@@ -46,7 +47,8 @@ class AlarmSandboxReceiver extends BroadcastReceiver // with SensorEventListener
           .target("https://alarmsandbox:WhyejBild0@www.pulsation.eu:6984" + "/alarmsandbox")
           .continuous(false)
           .build();
-
+      
+      
       server.replicate(pushCommand);
     
     }

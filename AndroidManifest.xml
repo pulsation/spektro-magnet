@@ -30,6 +30,11 @@
         android:resource="@xml/sync_adapter" />
     </service>
 
+    <provider android:name="AlarmSandboxContentProvider"
+      android:authorities="eu.pulsation.alarmsandbox.content"
+      android:syncable="true"
+      android:label="AndroidSandboxProvider" />
+
     <activity android:name="AlarmSandboxAccountActivity"
       android:label="@string/app_name" />
 

@@ -48,7 +48,10 @@ class AlarmSandboxAccountActivity extends AccountAuthenticatorActivity { self =>
         accountInfo.putCharSequence("database", "alarmsandbox")
         
         val extras : Bundle = new Bundle()
-        ContentResolver.addPeriodicSync(account, "my_authority", extras, 900)
+        ContentResolver.addPeriodicSync(account, "eu.pulsation.alarmsandbox.content", extras, 900)
+        ContentResolver.setIsSyncable(account, "eu.pulsation.alarmsandbox.content", 1)
+        ContentResolver.setSyncAutomatically(account, "eu.pulsation.alarmsandbox.content", false)
+      
         AccountManager.get(self).addAccountExplicitly(account, password, accountInfo)
         self.finish()
       }
