@@ -38,6 +38,7 @@ class AlarmSandboxSyncAdapterService extends Service { self =>
     Log.i("AlarmSandboxSyncAdapterService", "Synchronization stub.")
     Log.i("AlarmSandboxSyncAdapterService", accountManager.getPassword(account))
     Log.i("AlarmSandboxSyncAdapterService", accountManager.getUserData(account, "server"))
+    Log.i("AlarmSandboxSyncAdapterService", accountManager.getUserData(account, "database"))
     Log.i("AlarmSandboxSyncAdapterService", accountManager.getUserData(account, "login"))
   }
 }
