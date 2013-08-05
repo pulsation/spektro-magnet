@@ -35,6 +35,20 @@ class AlarmSandboxAccountActivity extends AccountAuthenticatorActivity { self =>
       }
     }
 
+    lazy val database = { 
+      this.findViewById(R.id.database_field) match {
+        case txt : EditText => txt.getText().toString()
+        case _ => throw new ClassCastException
+      }
+    }
+
+    lazy val server = { 
+      this.findViewById(R.id.server_field) match {
+        case txt : EditText => txt.getText().toString()
+        case _ => throw new ClassCastException
+      }
+    }
+
     super.onCreate(savedInstanceState)
     setContentView(R.layout.account)
 
@@ -44,13 +58,14 @@ class AlarmSandboxAccountActivity extends AccountAuthenticatorActivity { self =>
         val account : Account = new Account(login, AccountType)
         val accountInfo : Bundle = new Bundle()
 
-        accountInfo.putCharSequence("server", "www.pulsation.eu")
-        accountInfo.putCharSequence("database", "alarmsandbox")
+        accountInfo.putCharSequence("login", login)
+        accountInfo.putCharSequence("server", server)
+        accountInfo.putCharSequence("database", database)
         
         val extras : Bundle = new Bundle()
-        ContentResolver.addPeriodicSync(account, "eu.pulsation.alarmsandbox.content", extras, 900)
+        ContentResolver.addPeriodicSync(account, "eu.pulsation.alarmsandbox.content", extras, 120)
         ContentResolver.setIsSyncable(account, "eu.pulsation.alarmsandbox.content", 1)
-        ContentResolver.setSyncAutomatically(account, "eu.pulsation.alarmsandbox.content", false)
+        ContentResolver.setSyncAutomatically(account, "eu.pulsation.alarmsandbox.content", true)
       
         AccountManager.get(self).addAccountExplicitly(account, password, accountInfo)
         self.finish()

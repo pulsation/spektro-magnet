@@ -39,7 +39,6 @@ class AlarmSandboxHelper(context: Context) {
 
     am.setRepeating(AlarmManager.RTC_WAKEUP, new Date().getTime() , 60 * 1000,  scheduledReceiver)
 
-    Log.i("AlarmSandboxActivity", "===> Alarm added! <===")
   }
 
   /**

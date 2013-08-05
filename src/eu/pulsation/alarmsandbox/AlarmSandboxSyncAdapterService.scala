@@ -8,7 +8,7 @@ import android.content.Context
 import android.app.Service
 import android.os.{Bundle, IBinder}
 import android.content.{ContentProviderClient, AbstractThreadedSyncAdapter, SyncResult, Intent}
-import android.accounts.Account
+import android.accounts.{Account, AccountManager}
 
 import android.util.Log
 
@@ -27,9 +27,18 @@ class AlarmSandboxSyncAdapterService extends Service { self =>
 
   private def performSync(context: Context, account: Account, extras: Bundle, authority: String, provider: ContentProviderClient,
     syncResult: SyncResult) {
-      val contentResolver = context.getContentResolver()
-      // TODO: Implement synchronization
-      Log.i("AlarmSandboxSyncAdapterService", "Synchronization stub.")
+
+    lazy val accountManager : AccountManager = {
+      this.getSystemService(Context.ACCOUNT_SERVICE) match {
+        case am : AccountManager => am
+        case _ => throw new ClassCastException
+      }
+    }
+
+    Log.i("AlarmSandboxSyncAdapterService", "Synchronization stub.")
+    Log.i("AlarmSandboxSyncAdapterService", accountManager.getPassword(account))
+    Log.i("AlarmSandboxSyncAdapterService", accountManager.getUserData(account, "server"))
+    Log.i("AlarmSandboxSyncAdapterService", accountManager.getUserData(account, "login"))
   }
 }
 
