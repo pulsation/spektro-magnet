@@ -16,7 +16,7 @@ What it does
 ============
 The application can start a service that collects periodically as much sensor data as possible,
 and store it in a local database. It replicates data to an online database if a 
-`CouchDB<https://couchdb.apache.org/>`_ (typically, an `Iris Couch<https://www.iriscouch.com/>`_ instance) 
+`CouchDB<https://couchdb.apache.org/>`_ 
 or a `Couchbase Sync Gateway<https://github.com/couchbaselabs/sync_gateway>`_ 
 account is provided.
 
@@ -25,7 +25,7 @@ Requirements
 
 * sbt - http://www.scala-sbt.org/
 * Android SDK - https://developer.android.com/sdk/index.html
-* A CouchDB compatible database
+* A CouchDB compatible database (typically, an `Iris Couch<https://www.iriscouch.com/>`_ instance)
 
 Installation from source
 ========================
