@@ -54,7 +54,7 @@ class AlarmSandboxSyncAdapterService extends Service { self =>
       lazy val serverInstance : CouchDbInstance = new StdCouchDbInstance(httpClient)
 
       val pushCommand  : ReplicationCommand= new ReplicationCommand.Builder()
-          .source("alarmsandbox")
+          .source(R.string.local_db_name)
 //          .target("https://alarmsandbox:WhyejBild0@www.pulsation.eu:6984" + "/alarmsandbox")
           .target("https://" + login + ":" + password + "@" + server + ":6984" + "/" + database)
           .continuous(false)

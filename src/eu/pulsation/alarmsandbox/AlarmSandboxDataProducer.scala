@@ -38,7 +38,7 @@ trait AlarmSandboxDataProducer {
 
   lazy val dbInstance : CouchDbInstance = new StdCouchDbInstance(httpClient)
 
-  lazy val dbConnector = dbInstance.createConnector("alarmsandbox", true)
+  lazy val dbConnector = dbInstance.createConnector(R.string.local_db_name, true)
 
   /**
    * Returns the document to be inserted in the database.
