@@ -63,7 +63,6 @@ class AlarmSandboxSyncAdapterService extends Service { self =>
 
       val pushCommand  : ReplicationCommand= new ReplicationCommand.Builder()
           .source(context.getString(R.string.local_db_name))
-//          .target("https://alarmsandbox:WhyejBild0@www.pulsation.eu:6984" + "/alarmsandbox")
           .target(  R.string.remote_db_protocol + "://" 
                     + login + ":" + password 
                     + "@" + server + ":" + R.string.remote_db_port 
