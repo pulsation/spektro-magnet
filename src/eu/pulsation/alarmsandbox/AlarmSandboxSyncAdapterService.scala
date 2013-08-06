@@ -12,9 +12,21 @@ import android.accounts.{Account, AccountManager}
 
 import android.util.Log
 
+import org.ektorp.{ReplicationCommand, ReplicationStatus, CouchDbConnector, CouchDbInstance}
+import org.ektorp.http.HttpClient
+import org.ektorp.impl.StdCouchDbInstance
+
+import com.couchbase.cblite.router.CBLURLStreamHandlerFactory
+import com.couchbase.cblite.ektorp.CBLiteHttpClient
+import com.couchbase.cblite.{CBLServer}
+
 class AlarmSandboxSyncAdapterService extends Service { self =>
 
   def onBind(intent: Intent) : IBinder = {
+
+    // Install the cblite URL handler, c.f. https://github.com/couchbase/couchbase-lite-android/wiki/FAQ-Android#q-why-do-i-see-a-message-like-javanetmalformedurlexception-unknown-protocol-cblite
+    CBLURLStreamHandlerFactory.registerSelfIgnoreError()
+
     lazy val syncAdapter = { 
       new AbstractThreadedSyncAdapter(this, true) {
         def onPerformSync(account: Account, extras: Bundle, authority: String, provider: ContentProviderClient, syncResult: SyncResult) {
@@ -28,6 +40,30 @@ class AlarmSandboxSyncAdapterService extends Service { self =>
   private def performSync(context: Context, account: Account, extras: Bundle, authority: String, provider: ContentProviderClient,
     syncResult: SyncResult) {
 
+    lazy val login = accountManager.getUserData(account, "login")
+    lazy val password = accountManager.getPassword(account)
+    lazy val server = accountManager.getUserData(account, "server")
+    lazy val database = accountManager.getUserData(account, "database")
+
+    def doReplicate() : ReplicationStatus = {
+
+      // Connection to database
+      lazy val filesDir : String = context.getFilesDir().getAbsolutePath()
+      lazy val tdserver : CBLServer = new CBLServer(filesDir)
+      lazy val httpClient : HttpClient = new CBLiteHttpClient(tdserver)
+      lazy val serverInstance : CouchDbInstance = new StdCouchDbInstance(httpClient)
+
+      val pushCommand  : ReplicationCommand= new ReplicationCommand.Builder()
+          .source("alarmsandbox")
+//          .target("https://alarmsandbox:WhyejBild0@www.pulsation.eu:6984" + "/alarmsandbox")
+          .target("https://" + login + ":" + password + "@" + server + ":6984" + "/" + database)
+          .continuous(false)
+          .build();
+
+      serverInstance.replicate(pushCommand);
+      // TODO: Remove replicated data
+    }
+
     lazy val accountManager : AccountManager = {
       this.getSystemService(Context.ACCOUNT_SERVICE) match {
         case am : AccountManager => am
@@ -35,11 +71,7 @@ class AlarmSandboxSyncAdapterService extends Service { self =>
       }
     }
 
-    Log.i("AlarmSandboxSyncAdapterService", "Synchronization stub.")
-    Log.i("AlarmSandboxSyncAdapterService", accountManager.getPassword(account))
-    Log.i("AlarmSandboxSyncAdapterService", accountManager.getUserData(account, "server"))
-    Log.i("AlarmSandboxSyncAdapterService", accountManager.getUserData(account, "database"))
-    Log.i("AlarmSandboxSyncAdapterService", accountManager.getUserData(account, "login"))
+    doReplicate()
   }
 }
 
