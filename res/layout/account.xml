@@ -11,7 +11,7 @@
     >
 
     <TextView      
-      android:text="Server: "
+      android:text="@string/accnt_server"
       android:layout_width="130dip"
       android:layout_height="fill_parent"
       android:gravity="right|center_vertical"
@@ -28,7 +28,7 @@
     >
 
     <TextView      
-      android:text="Database: "
+      android:text="@string/accnt_database"
       android:layout_width="130dip"
       android:layout_height="fill_parent"
       android:gravity="right|center_vertical"
@@ -45,7 +45,7 @@
     >
 
     <TextView      
-      android:text="Login: "
+      android:text="@string/accnt_login"
       android:layout_width="130dip"
       android:layout_height="fill_parent"
       android:gravity="right|center_vertical"
@@ -62,7 +62,7 @@
     android:layout_height="wrap_content"
     >
     <TextView      
-      android:text="Password: "
+      android:text="@string/accnt_password"
       android:layout_width="130dip"
       android:layout_height="fill_parent"
       android:gravity="right|center_vertical"

@@ -6,13 +6,13 @@
     >
   <Button 
     android:id="@+id/start_service_btn"
-    android:text="Start service"
+    android:text="@string/main_start_service"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     />
   <Button 
     android:id="@+id/stop_service_btn"
-    android:text="Stop service"
+    android:text="@string/main_stop_service"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     />
@@ -20,7 +20,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:id="@+id/status_txt"
-    android:text="Ready."
+    android:text="@string/main_ready"
     />
 
 </LinearLayout>

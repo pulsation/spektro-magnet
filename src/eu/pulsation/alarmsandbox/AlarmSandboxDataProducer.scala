@@ -16,6 +16,7 @@ import org.ektorp.http.HttpClient
 import org.ektorp.impl.StdCouchDbInstance
 
 import android.content.Context
+//import android.content.res.Resources
 
 import android.util.Log
 
@@ -38,7 +39,7 @@ trait AlarmSandboxDataProducer {
 
   lazy val dbInstance : CouchDbInstance = new StdCouchDbInstance(httpClient)
 
-  lazy val dbConnector = dbInstance.createConnector(R.string.local_db_name, true)
+  lazy val dbConnector = dbInstance.createConnector(context.getString(R.string.local_db_name), true)
 
   /**
    * Returns the document to be inserted in the database.

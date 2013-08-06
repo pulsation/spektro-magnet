@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!-- Account activity -->
+  <string name="accnt_server">Server: </string>
+  <string name="accnt_database">Database: </string>
+  <string name="accnt_login">Login: </string>
+  <string name="accnt_password">Password: </string>
+
+  <!-- Main activity -->
+  <string name="main_ready">Ready.</string>
+  <string name="main_stop_service">Stop service</string>
+  <string name="main_start_service">Start service</string>
+
+</resources>

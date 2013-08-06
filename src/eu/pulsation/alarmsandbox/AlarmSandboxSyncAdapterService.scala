@@ -5,6 +5,7 @@ package eu.pulsation.alarmsandbox
  */
 
 import android.content.Context
+//import android.content.res.Resources
 import android.app.Service
 import android.os.{Bundle, IBinder}
 import android.content.{ContentProviderClient, AbstractThreadedSyncAdapter, SyncResult, Intent}
@@ -40,6 +41,13 @@ class AlarmSandboxSyncAdapterService extends Service { self =>
   private def performSync(context: Context, account: Account, extras: Bundle, authority: String, provider: ContentProviderClient,
     syncResult: SyncResult) {
 
+    lazy val accountManager : AccountManager = {
+      this.getSystemService(Context.ACCOUNT_SERVICE) match {
+        case am : AccountManager => am
+        case _ => throw new ClassCastException
+      }
+    }
+
     lazy val login = accountManager.getUserData(account, "login")
     lazy val password = accountManager.getPassword(account)
     lazy val server = accountManager.getUserData(account, "server")
@@ -54,21 +62,17 @@ class AlarmSandboxSyncAdapterService extends Service { self =>
       lazy val serverInstance : CouchDbInstance = new StdCouchDbInstance(httpClient)
 
       val pushCommand  : ReplicationCommand= new ReplicationCommand.Builder()
-          .source(R.string.local_db_name)
+          .source(context.getString(R.string.local_db_name))
 //          .target("https://alarmsandbox:WhyejBild0@www.pulsation.eu:6984" + "/alarmsandbox")
-          .target("https://" + login + ":" + password + "@" + server + ":6984" + "/" + database)
+          .target(  R.string.remote_db_protocol + "://" 
+                    + login + ":" + password 
+                    + "@" + server + ":" + R.string.remote_db_port 
+                    + "/" + database)
           .continuous(false)
           .build();
 
       serverInstance.replicate(pushCommand);
       // TODO: Remove replicated data
-    }
-
-    lazy val accountManager : AccountManager = {
-      this.getSystemService(Context.ACCOUNT_SERVICE) match {
-        case am : AccountManager => am
-        case _ => throw new ClassCastException
-      }
     }
 
     doReplicate()
