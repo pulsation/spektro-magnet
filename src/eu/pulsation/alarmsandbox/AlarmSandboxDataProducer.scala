@@ -16,6 +16,7 @@ import org.ektorp.http.HttpClient
 import org.ektorp.impl.StdCouchDbInstance
 
 import android.content.Context
+import android.telephony.TelephonyManager
 //import android.content.res.Resources
 
 import android.util.Log
@@ -49,11 +50,20 @@ trait AlarmSandboxDataProducer {
     val document:ObjectNode = JsonNodeFactory.instance.objectNode()
 
     val dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSZ")
-    val uuid = UUID.randomUUID()
     val now = dateFormatter.format(new Date())
+    val uuid = UUID.randomUUID()
+    lazy val tManager : TelephonyManager = {
+      context.getSystemService(Context.TELEPHONY_SERVICE) match {
+        case tm : TelephonyManager => tm
+        case _ => throw new ClassCastException
+      }
+    }
+    val phoneId = tManager.getDeviceId()
 
     document.put("_id", now + '-' + uuid)
     document.put("timestamp", now)
+    document.put("phoneId", phoneId)
+    document.put("phoneModel", android.os.Build.MODEL)
    
     document
   }
@@ -62,7 +72,6 @@ trait AlarmSandboxDataProducer {
    * Inserts document in the local database.
    */
   def insertDocument() = {
-    Log.v("AlarmSandboxDataProducer", "===> Writing data to local database <===")
     dbConnector.create(getDocument())
   }
 }

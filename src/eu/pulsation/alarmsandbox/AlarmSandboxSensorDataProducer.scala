@@ -31,7 +31,13 @@ trait AlarmSandboxSensorDataProducer extends AlarmSandboxDataProducer {
     val jsonValues: ArrayNode = document.putArray("values")
 
     // Sensor characteristics
-    document.put("sensorType", sensorTypes(sensorData.sensor.getType()))
+    try {
+      document.put("sensorType", sensorTypes(sensorData.sensor.getType()))
+    } catch {
+      case e: Exception => { 
+        document.put("sensorType", sensorData.sensor.getType()) 
+      }
+    }
     document.put("androidType", sensorData.sensor.getType())
     document.put("sensorName", sensorData.sensor.getName())
 
