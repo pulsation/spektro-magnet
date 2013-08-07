@@ -46,6 +46,7 @@ TODO
 
 * Possibility to delete account
 * Frequency tuning
+* Possibility to choose which sensors to gather data from
 * Empty database from time to time
 
 Bugs
