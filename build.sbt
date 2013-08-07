@@ -6,7 +6,7 @@ android.Plugin.androidBuild
 
 name := "AlarmSandbox"
 
-scalacOptions += "-deprecation"
+scalacOptions ++= Seq("-deprecation", "-Xlint")
 
 proguardOptions in Android ++= Seq(
     "-keepattributes *Annotation*,EnclosingMethod",
@@ -42,3 +42,5 @@ libraryDependencies ++= Seq(
     "com.couchbase.cblite" % "CBLite" % "0.7",
     "com.couchbase.cblite" % "CBLiteEktorp" % "0.7.2"
  )
+
+org.scalastyle.sbt.ScalastylePlugin.Settings
