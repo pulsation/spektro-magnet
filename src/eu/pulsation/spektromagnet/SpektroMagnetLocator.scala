@@ -1,11 +1,11 @@
-package eu.pulsation.alarmsandbox
+package eu.pulsation.spektromagnet
 
 import android.location.{LocationManager, Location, LocationListener}
 import android.util.Log
 import android.content.Context
 import android.os.Bundle
 
-class AlarmSandboxLocator(override val context: Context) extends LocationListener with AlarmSandboxLocationDataProducer {
+class SpektroMagnetLocator(override val context: Context) extends LocationListener with SpektroMagnetLocationDataProducer {
 
   def getLocManager() = {
     context.getSystemService(Context.LOCATION_SERVICE) match {
@@ -18,7 +18,7 @@ class AlarmSandboxLocator(override val context: Context) extends LocationListene
     // We don't care if the date is not accurate.
     // val date = new Date()
 
-    Log.i("AlarmSandboxLocator", "===> Got location update <===")
+    Log.i("SpektroMagnetLocator", "===> Got location update <===")
     this.insertLocationData(location)
   }
 

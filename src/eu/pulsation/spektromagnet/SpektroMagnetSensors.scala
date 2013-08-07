@@ -1,11 +1,11 @@
-package eu.pulsation.alarmsandbox
+package eu.pulsation.spektromagnet
 
 import android.hardware.{SensorEventListener, SensorManager, SensorEvent, Sensor}
 import android.content.Context
 
 import scala.collection.JavaConversions._
 
-class AlarmSandboxSensors(override val context: Context) extends SensorEventListener with AlarmSandboxSensorDataProducer {
+class SpektroMagnetSensors(override val context: Context) extends SensorEventListener with SpektroMagnetSensorDataProducer {
 
   lazy val sensorManager : SensorManager = {
     context.getSystemService(Context.SENSOR_SERVICE) match {

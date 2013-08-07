@@ -1,9 +1,9 @@
-package eu.pulsation.alarmsandbox
+package eu.pulsation.spektromagnet
 
 import org.codehaus.jackson.node.ObjectNode
 import android.location.Location
 
-trait AlarmSandboxLocationDataProducer extends AlarmSandboxDataProducer {
+trait SpektroMagnetLocationDataProducer extends SpektroMagnetDataProducer {
 
   var locationData : Location = null
 

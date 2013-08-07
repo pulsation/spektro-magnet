@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Alarm Sandbox</string>
+  <string name="app_name">Spektro Magnet</string>
 
   <!-- Databases -->
-  <string name="local_db_name">alarmsandbox</string>
+  <string name="local_db_name">spektromagnet</string>
   <string name="remote_db_protocol">https</string>
   <string name="remote_db_port">6984</string>
 

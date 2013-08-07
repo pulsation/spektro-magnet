@@ -1,4 +1,4 @@
-package eu.pulsation.alarmsandbox
+package eu.pulsation.spektromagnet
 
 import android.content.{BroadcastReceiver, Context, Intent}
 
@@ -9,12 +9,12 @@ import android.content.{BroadcastReceiver, Context, Intent}
  * sound and it vibrates the phone.
  * 
  */
-class AlarmSandboxReceiver extends BroadcastReceiver // with SensorEventListener
+class SpektroMagnetReceiver extends BroadcastReceiver // with SensorEventListener
 {
 
   override def onReceive(context: Context, intent: Intent) {
-    new AlarmSandboxLocator(context)
-    new AlarmSandboxSensors(context)
+    new SpektroMagnetLocator(context)
+    new SpektroMagnetSensors(context)
   }
 
 }

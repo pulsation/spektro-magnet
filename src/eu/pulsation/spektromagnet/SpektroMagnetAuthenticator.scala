@@ -1,4 +1,4 @@
-package eu.pulsation.alarmsandbox
+package eu.pulsation.spektromagnet
 
 import android.content.{Context, Intent}
 import android.os.Bundle
@@ -10,7 +10,7 @@ import android.util.Log
 /**
  * Implementation based on http://www.c99.org/2010/01/23/writing-an-android-sync-provider-part-1/
  */
-class AlarmSandboxAuthenticator (context : Context) extends AbstractAccountAuthenticator (context: Context) {
+class SpektroMagnetAuthenticator (context : Context) extends AbstractAccountAuthenticator (context: Context) {
 
   def hasFeatures(response : AccountAuthenticatorResponse, account: Account , features: Array [String]) : Bundle = { null }
 
@@ -30,9 +30,9 @@ class AlarmSandboxAuthenticator (context : Context) extends AbstractAccountAuthe
   def addAccount(response : AccountAuthenticatorResponse, accountType : String, authTokenType : String, requiredFeatures: Array[String],
     options : Bundle) : Bundle = {
       val bundle: Bundle = new Bundle()
-      val intent : Intent = new Intent(context, classOf[AlarmSandboxAccountActivity])
+      val intent : Intent = new Intent(context, classOf[SpektroMagnetAccountActivity])
 
-      Log.i("AlarmSandboxAuthenticator", "Entered addAccount()")
+      Log.i("SpektroMagnetAuthenticator", "Entered addAccount()")
 
       intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response)
       bundle.putParcelable(AccountManager.KEY_INTENT, intent)

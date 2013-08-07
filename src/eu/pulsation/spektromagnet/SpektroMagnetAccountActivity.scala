@@ -1,4 +1,4 @@
-package eu.pulsation.alarmsandbox
+package eu.pulsation.spektromagnet
 
 import android.accounts.{AccountAuthenticatorActivity, AccountManager, Account}
 import android.os.Bundle
@@ -9,8 +9,8 @@ import android.view.View
 
 import android.content.ContentResolver
 
-class AlarmSandboxAccountActivity extends AccountAuthenticatorActivity { self =>
-  val AccountType : String = "eu.pulsation.alarmsandbox.couchdb"
+class SpektroMagnetAccountActivity extends AccountAuthenticatorActivity { self =>
+  val AccountType : String = "eu.pulsation.spektromagnet.couchdb"
 
   override def onCreate(savedInstanceState: Bundle) {
 
@@ -63,9 +63,9 @@ class AlarmSandboxAccountActivity extends AccountAuthenticatorActivity { self =>
         accountInfo.putCharSequence("database", database)
         
         val extras : Bundle = new Bundle()
-        ContentResolver.addPeriodicSync(account, "eu.pulsation.alarmsandbox.content", extras, 120)
-        ContentResolver.setIsSyncable(account, "eu.pulsation.alarmsandbox.content", 1)
-        ContentResolver.setSyncAutomatically(account, "eu.pulsation.alarmsandbox.content", true)
+        ContentResolver.addPeriodicSync(account, "eu.pulsation.spektromagnet.content", extras, 120)
+        ContentResolver.setIsSyncable(account, "eu.pulsation.spektromagnet.content", 1)
+        ContentResolver.setSyncAutomatically(account, "eu.pulsation.spektromagnet.content", true)
       
         AccountManager.get(self).addAccountExplicitly(account, password, accountInfo)
         self.finish()

@@ -1,11 +1,11 @@
-package eu.pulsation.alarmsandbox
+package eu.pulsation.spektromagnet
 
 import android.content.ContentProvider
 import android.content.ContentValues
 import android.net.Uri
 import android.database.Cursor
 
-class AlarmSandboxContentProvider extends ContentProvider {
+class SpektroMagnetContentProvider extends ContentProvider {
 
     def delete(uri: Uri, selection: String, selectionArgs: Array[String]) : Int = {
       0

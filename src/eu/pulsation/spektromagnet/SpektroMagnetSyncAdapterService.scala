@@ -1,4 +1,4 @@
-package eu.pulsation.alarmsandbox
+package eu.pulsation.spektromagnet
 
 /**
  * Implemented from example http://www.c99.org/2010/01/23/writing-an-android-sync-provider-part-2/
@@ -21,7 +21,7 @@ import com.couchbase.cblite.router.CBLURLStreamHandlerFactory
 import com.couchbase.cblite.ektorp.CBLiteHttpClient
 import com.couchbase.cblite.{CBLServer}
 
-class AlarmSandboxSyncAdapterService extends Service { self =>
+class SpektroMagnetSyncAdapterService extends Service { self =>
 
   def onBind(intent: Intent) : IBinder = {
 

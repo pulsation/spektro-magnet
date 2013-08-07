@@ -1,4 +1,4 @@
-package eu.pulsation.alarmsandbox
+package eu.pulsation.spektromagnet
 
 import java.util.{Calendar, Map, Set, Date}
 
@@ -15,7 +15,7 @@ import android.util.Log
  * 
  * @author dvtoever
  */
-class AlarmSandboxHelper(context: Context) {
+class SpektroMagnetHelper(context: Context) {
 
   private def getAlarmManager() : AlarmManager = {
     context.getSystemService(Context.ALARM_SERVICE) match {
@@ -28,7 +28,7 @@ class AlarmSandboxHelper(context: Context) {
 
     val am:AlarmManager = this.getAlarmManager()
 
-    val sandboxBroadcastReceiver:BroadcastReceiver = new AlarmSandboxReceiver()
+    val sandboxBroadcastReceiver:BroadcastReceiver = new SpektroMagnetReceiver()
 
     context.registerReceiver (sandboxBroadcastReceiver, new IntentFilter ("my.alarm.action"))
 
@@ -47,7 +47,7 @@ class AlarmSandboxHelper(context: Context) {
   def stopAlarm() = {
     // TODO
 
-    val intent : Intent = new Intent(context, classOf[AlarmSandboxReceiver])
+    val intent : Intent = new Intent(context, classOf[SpektroMagnetReceiver])
     intent.setAction("my.alarm.action")
 
     val pi : PendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT)

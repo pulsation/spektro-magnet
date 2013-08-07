@@ -1,4 +1,4 @@
-package eu.pulsation.alarmsandbox
+package eu.pulsation.spektromagnet
 
 // TODO: test http://stackoverflow.com/questions/4459058/alarm-manager-example
 
@@ -11,12 +11,12 @@ import android.view.View.OnClickListener
 
 import com.couchbase.cblite.router.CBLURLStreamHandlerFactory
 
-class AlarmSandboxActivity extends Activity {
+class SpektroMagnetActivity extends Activity {
   /** Called when the activity is first created. */
   override def onCreate(savedInstanceState: Bundle) {
 
-    lazy val alarmSandboxHelper = {
-      new AlarmSandboxHelper(this)
+    lazy val spektroMagnetHelper = {
+      new SpektroMagnetHelper(this)
     }
 
     lazy val statusTxt : TextView = {
@@ -43,14 +43,14 @@ class AlarmSandboxActivity extends Activity {
     // Bind buttons
     startServiceBtn.setOnClickListener(new OnClickListener() {
       def onClick(v : View) {
-        alarmSandboxHelper.startAlarm()
+        spektroMagnetHelper.startAlarm()
         statusTxt.append("\nService started.");
      }
    })
 
     stopServiceBtn.setOnClickListener(new OnClickListener() {
       def onClick(v : View) {
-        alarmSandboxHelper.stopAlarm()
+        spektroMagnetHelper.stopAlarm()
         statusTxt.append("\nService stopped.");
      }
    })

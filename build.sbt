@@ -4,7 +4,7 @@ android.Plugin.androidBuild
 
 // logLevel := Level.Debug
 
-name := "AlarmSandbox"
+name := "SpektroMagnet"
 
 scalacOptions ++= Seq("-deprecation", "-Xlint")
 
@@ -16,9 +16,9 @@ proguardOptions in Android ++= Seq(
     "-keep class com.couchbase.cblite.router.CBLRouter { *; }",
     "-keep class com.couchbase.touchdb.TDCollateJSON { *; }",
     "-keepclasseswithmembers class * { native <methods>; }",
-    "-keep class eu.pulsation.alarmsandbox.AlarmSandboxAuthenticator { *; }",
-    "-keep class eu.pulsation.alarmsandbox.AlarmSandboxSyncAdapterService { *; }",
-    "-keep class eu.pulsation.alarmsandbox.AlarmSandboxContentProvider { *; }"
+    "-keep class eu.pulsation.spektromagnet.SpektroMagnetAuthenticator { *; }",
+    "-keep class eu.pulsation.spektromagnet.SpektroMagnetSyncAdapterService { *; }",
+    "-keep class eu.pulsation.spektromagnet.SpektroMagnetContentProvider { *; }"
 )
 
 proguardOptions in Android ++= Seq("-dontobfuscate", "-dontoptimize",

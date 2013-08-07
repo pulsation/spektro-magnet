@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="eu.pulsation.alarmsandbox"
+  package="eu.pulsation.spektromagnet"
   android:versionCode="1"
   android:versionName="1.0">
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -14,7 +14,7 @@
 
   <application android:label="@string/app_name" android:icon="@drawable/ic_launcher">
 
-    <service android:name="AlarmSandboxAuthenticatorService"
+    <service android:name="SpektroMagnetAuthenticatorService"
       android:process=":auth">
       <intent-filter>
         <action android:name="android.accounts.AccountAuthenticator" />
@@ -23,7 +23,7 @@
         android:resource="@xml/authenticator" />
     </service>
 
-    <service android:name="AlarmSandboxSyncAdapterService"
+    <service android:name="SpektroMagnetSyncAdapterService"
       android:exported="true" android:process=":sync_data">
       <intent-filter>
         <action android:name="android.content.SyncAdapter" />
@@ -32,15 +32,15 @@
         android:resource="@xml/sync_adapter" />
     </service>
 
-    <provider android:name="AlarmSandboxContentProvider"
-      android:authorities="eu.pulsation.alarmsandbox.content"
+    <provider android:name="SpektroMagnetContentProvider"
+      android:authorities="eu.pulsation.spektromagnet.content"
       android:syncable="true"
       android:label="AndroidSandboxProvider" />
 
-    <activity android:name="AlarmSandboxAccountActivity"
+    <activity android:name="SpektroMagnetAccountActivity"
       android:label="@string/app_name" />
 
-    <activity android:name="AlarmSandboxActivity"
+    <activity android:name="SpektroMagnetActivity"
       android:label="@string/app_name">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />

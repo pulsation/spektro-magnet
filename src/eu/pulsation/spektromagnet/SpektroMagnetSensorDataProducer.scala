@@ -1,11 +1,11 @@
-package eu.pulsation.alarmsandbox
+package eu.pulsation.spektromagnet
 
 import android.hardware.{SensorEvent, Sensor}
 
 import org.codehaus.jackson.node.{ObjectNode, ArrayNode}
 import scala.collection.immutable.HashMap
 
-trait AlarmSandboxSensorDataProducer extends AlarmSandboxDataProducer {
+trait SpektroMagnetSensorDataProducer extends SpektroMagnetDataProducer {
 
   var sensorData : SensorEvent = null
 
@@ -35,7 +35,7 @@ trait AlarmSandboxSensorDataProducer extends AlarmSandboxDataProducer {
       document.put("sensorType", sensorTypes(sensorData.sensor.getType()))
     } catch {
       case e: Exception => { 
-        document.put("sensorType", sensorData.sensor.getType()) 
+        document.put("sensorType", "Unknown")
       }
     }
     document.put("androidType", sensorData.sensor.getType())

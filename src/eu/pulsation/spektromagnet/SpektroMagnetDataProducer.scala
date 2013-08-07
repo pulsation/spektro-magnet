@@ -1,4 +1,4 @@
-package eu.pulsation.alarmsandbox
+package eu.pulsation.spektromagnet
 
 import java.text.SimpleDateFormat
 import java.util.{UUID, Date}
@@ -26,7 +26,7 @@ import android.util.Log
  * Ability to write data in a CouchDB database.
  *
  */
-trait AlarmSandboxDataProducer {
+trait SpektroMagnetDataProducer {
 
   // To be overriden
   val context : Context = null
