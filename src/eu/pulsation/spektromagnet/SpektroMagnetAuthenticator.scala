@@ -24,9 +24,6 @@ class SpektroMagnetAuthenticator (context : Context) extends AbstractAccountAuth
 
   def getAuthToken(response : AccountAuthenticatorResponse, account: Account, authTokenType: String, options : Bundle) : Bundle = { null }
 
-  /**
-   * TODO: To be implemented
-   */
   def addAccount(response : AccountAuthenticatorResponse, accountType : String, authTokenType : String, requiredFeatures: Array[String],
     options : Bundle) : Bundle = {
       val bundle: Bundle = new Bundle()
@@ -38,5 +35,4 @@ class SpektroMagnetAuthenticator (context : Context) extends AbstractAccountAuth
       bundle.putParcelable(AccountManager.KEY_INTENT, intent)
       bundle
   }
-
 }

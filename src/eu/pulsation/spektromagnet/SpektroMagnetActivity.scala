@@ -1,7 +1,5 @@
 package eu.pulsation.spektromagnet
 
-// TODO: test http://stackoverflow.com/questions/4459058/alarm-manager-example
-
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log
