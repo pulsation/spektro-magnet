@@ -10,5 +10,5 @@
   <string name="main_ready">Ready.</string>
   <string name="main_stop_service">Stop service</string>
   <string name="main_start_service">Start service</string>
-
+  <string name="main_add_account">Add database account</string>
 </resources>
