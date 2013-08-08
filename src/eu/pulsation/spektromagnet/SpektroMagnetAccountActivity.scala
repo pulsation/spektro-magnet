@@ -3,9 +3,10 @@ package eu.pulsation.spektromagnet
 import android.accounts.{AccountAuthenticatorActivity, AccountManager, Account}
 import android.os.Bundle
 import android.app.Activity
-import android.widget.{Button, EditText}
+import android.widget.{Button, EditText, TextView}
 import android.view.View.OnClickListener
 import android.view.View
+import android.text.method.LinkMovementMethod
 
 import android.content.ContentResolver
 
@@ -49,8 +50,18 @@ class SpektroMagnetAccountActivity extends AccountAuthenticatorActivity { self =
       }
     }
 
+    lazy val accntCommentTxt : TextView = {
+      this.findViewById(R.id.accnt_comment_txt) match {
+        case txt: TextView => txt
+        case _ => throw new ClassCastException
+      }
+    } 
+
     super.onCreate(savedInstanceState)
     setContentView(R.layout.account)
+
+    // Activate href link (c.f. http://stackoverflow.com/questions/2734270/how-do-i-make-links-in-a-textview-clickable/2746708#2746708 )
+    accntCommentTxt.setMovementMethod(LinkMovementMethod.getInstance())
 
     // Bind buttons
     proceedBtn.setOnClickListener(new OnClickListener() {

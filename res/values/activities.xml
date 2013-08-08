@@ -5,6 +5,11 @@
   <string name="accnt_database">Database: </string>
   <string name="accnt_login">Login: </string>
   <string name="accnt_password">Password: </string>
+  <string name="accnt_comment">
+    Please provide settings for a CouchDB compatible database. It will be accessed through https.
+    If you do not have any yet, a good place to start would be 
+    <a href="http://www.iriscouch.com/service">IrisCouch</a>.
+  </string>
 
   <!-- Main activity -->
   <string name="main_ready">Ready.</string>
