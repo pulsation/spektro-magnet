@@ -2,8 +2,6 @@ import android.Keys._
 
 android.Plugin.androidBuild
 
-// logLevel := Level.Debug
-
 name := "SpektroMagnet"
 
 scalacOptions ++= Seq("-deprecation", "-Xlint")
