@@ -36,8 +36,6 @@ import android.os.{Bundle, IBinder}
 import android.content.{ContentProviderClient, AbstractThreadedSyncAdapter, SyncResult, Intent}
 import android.accounts.{Account, AccountManager}
 
-import android.util.Log
-
 import org.ektorp.{ReplicationCommand, ReplicationStatus, CouchDbConnector, CouchDbInstance}
 import org.ektorp.http.HttpClient
 import org.ektorp.impl.StdCouchDbInstance

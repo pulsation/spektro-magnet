@@ -30,8 +30,6 @@ import android.os.Bundle
 
 import android.accounts.{AbstractAccountAuthenticator, AccountAuthenticatorResponse, Account, AccountManager}
 
-import android.util.Log
-
 /**
  * Implementation based on http://www.c99.org/2010/01/23/writing-an-android-sync-provider-part-1/
  */
@@ -53,8 +51,6 @@ class SpektroMagnetAuthenticator (context : Context) extends AbstractAccountAuth
     options : Bundle) : Bundle = {
       val bundle: Bundle = new Bundle()
       val intent : Intent = new Intent(context, classOf[SpektroMagnetAccountActivity])
-
-      Log.i("SpektroMagnetAuthenticator", "Entered addAccount()")
 
       intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response)
       bundle.putParcelable(AccountManager.KEY_INTENT, intent)

@@ -26,7 +26,6 @@
 package eu.pulsation.spektromagnet
 
 import android.location.{LocationManager, Location, LocationListener}
-import android.util.Log
 import android.content.Context
 import android.os.Bundle
 
@@ -43,7 +42,6 @@ class SpektroMagnetLocator(override val context: Context) extends LocationListen
     // We don't care if the date is not accurate.
     // val date = new Date()
 
-    Log.i("SpektroMagnetLocator", "===> Got location update <===")
     this.insertLocationData(location)
   }
 

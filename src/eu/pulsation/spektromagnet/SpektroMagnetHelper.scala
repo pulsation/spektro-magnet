@@ -29,7 +29,6 @@ import java.util.{Calendar, Map, Set, Date}
 
 import android.app.{AlarmManager, PendingIntent}
 import android.content.{Context, Intent, SharedPreferences, BroadcastReceiver, IntentFilter}
-import android.util.Log
 
 /**
  * Helper class for the LocalNotification plugin. This class is reused by the

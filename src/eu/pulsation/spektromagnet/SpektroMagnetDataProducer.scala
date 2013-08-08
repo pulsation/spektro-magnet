@@ -42,9 +42,6 @@ import org.ektorp.impl.StdCouchDbInstance
 
 import android.content.Context
 import android.telephony.TelephonyManager
-//import android.content.res.Resources
-
-import android.util.Log
 
 /**
  *
