@@ -20,6 +20,8 @@ and store it in a local database. It replicates data to an online database if a
 or a `Couchbase Sync Gateway <https://github.com/couchbaselabs/sync_gateway>`_ 
 account is provided.
 
+You can try it on `Google Play <https://play.google.com/store/apps/details?id=eu.pulsation.spektromagnet>`_.
+
 Requirements
 ============
 
