@@ -35,6 +35,8 @@ Installation from source
 * Install the android support repository component
 * In the project path, run::
 
+.. code:: bash
+
   android update project -p .
   sbt android:run
 
@@ -58,10 +60,13 @@ Bugs
 
 Thanks
 ======
+
 * `stanch <https://github.com/stanch>`_ , `tleyden <https://github.com/tleyden>`_ and pfurla who helped to resolve issues between sbt and proguard
 * `pfn <https://github.com/pfn>`_ for the `android sbt plugin <https://github.com/pfn/android-sdk-plugin>`_
 * `sylvainroussy <https://github.com/sylvainroussy>`_ for helping with android sync adapter issues
 
 Credits
 =======
+
 * Icon: Martin Berube - http://www.iconarchive.com/show/character-icons-by-martin-berube/Ghost-icon.html
+
